@@ -14,7 +14,7 @@ function transpile() {
 };
 
 function copyPug() {
-    return gulp.src('src/views/*.pug')
+    return gulp.src('src/views/**/*.handlebars')
         .pipe(gulp.dest(PROD_DEST + '/views'));
 }
 
