@@ -34,6 +34,5 @@ function copyDependency() {
 
 exports.transpile = transpile;
 exports.css = css;
-exports.copyPug = copyPug;
 exports.copyDependency = copyDependency;
-exports.default = gulp.parallel(transpile, copyPug, css, copyDependency);
+exports.default = gulp.parallel(transpile, css, copyDependency);
