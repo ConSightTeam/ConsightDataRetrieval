@@ -1,0 +1,94 @@
+body { margin: 0; padding: 0;
+}
+
+.mapid {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#mapid {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.temperature-control {
+  background: #ffffff;
+  padding: 10px;
+}
+.wind-control {
+  background: #ffffff;
+  padding: 10px;
+}
+.traffic-control {
+  background: #ffffff;
+  padding: 10px;
+}
+.rainfall-control {
+  background: #ffffff;
+  padding: 10px;
+}
+
+/* css to customize Leaflet default styles  */
+.custom .leaflet-popup-tip,
+.custom .leaflet-popup-content-wrapper {
+    background: #e93434;
+    color: #ffffff;
+}
+
+/* ANOTHER css to customize Leaflet default styles  */
+.custom-popup .leaflet-popup-content-wrapper {
+  /*background:#2c3e50;
+  color:#fff;*/
+  font-size:16px;
+  line-height:24px;
+}
+.custom-popup .leaflet-popup-content-wrapper a {
+  color:rgba(255,255,255,0.5);
+  }
+.custom-popup .leaflet-popup-tip-container {
+  width:30px;
+  height:15px;
+  }
+.custom-popup .leaflet-popup-tip {
+  border-left:15px solid transparent;
+  border-right:15px solid transparent;
+  border-top:15px solid #2c3e50;
+  }
+
+.custom-popup img {
+  border: 1px solid #ddd;
+  padding: 5px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+bigtext {
+  font-size: 20px;
+  font-weight: bold;
+  color: #6d7fcc;
+}
+
+.leaflet-retina .leaflet-control-layers-toggle {
+  background-image: url("icons-000000@2x.png");
+  background-size: 26px 26px;
+}
+
+.btn-customBlue {
+  background-color: #6d7fcc;
+  color: white;
+}
+
+.starter-template {
+  padding: 3rem 1.5rem;
+  color: black;
+}
+
+.starter-template p {
+  color: black;
+}

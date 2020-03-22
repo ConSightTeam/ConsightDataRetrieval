@@ -61,7 +61,7 @@ typings/
 .next
 
 # build output
-dist/
+/dist/
 
 
 # Created by https://www.gitignore.io/api/macos

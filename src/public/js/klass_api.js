@@ -33,20 +33,17 @@ $.busyLoadSetup({
     text: "Getting data"
 });
 
-
 loadAllData(true)
 
 
 function loadAllData(fullScreenLoading) {
     //Show spinner
-
     if (fullScreenLoading) {
         $.busyLoadFull("show");
     }
     getNodeInfo()
     getSensorCurrentValue()
     getNodeLatestHistory(currentSelectedDataDuration)
-
 
 }
 
