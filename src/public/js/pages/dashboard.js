@@ -470,8 +470,8 @@ function createClusterMarkers(){
 		mymap.addLayer(markers);
 }
 
-getNodeInfo();
-getJangwad();
+//getNodeInfo();
+//getJangwad();
 createFuckingClusterMarkers(); //เพิ่มเข้ามาใหม่ fucking
 
 function onMapClick(e) {

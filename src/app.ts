@@ -4,11 +4,13 @@ var path = require('path');
 var logger = require('morgan');
 var exphbs = require('express-handlebars');
 
-var hbs = exphbs.create();
+let hbs = exphbs.create();
 
-var indexRouter = require('./routes/index');
+import * as indexRouter from './routes/index';
+import * as aboutRouter from './routes/about';
+import * as contactRouter from './routes/contact';
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,5 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/about', aboutRouter);
+app.use('/contact', contactRouter);
 
 module.exports = app;

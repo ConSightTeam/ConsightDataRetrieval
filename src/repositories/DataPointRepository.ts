@@ -17,7 +17,6 @@ export class DataPointRepository {
             element.location = location;
             result.push(element as DataPoint)
         });
-        console.log(result);
         return result;
     }
 }
