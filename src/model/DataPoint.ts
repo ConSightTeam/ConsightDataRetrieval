@@ -3,4 +3,5 @@ class DataPoint {
     location: Geometry;
     data: object;
     insertedOn: Date;
+    nodeName?: string;
 }

@@ -342,11 +342,11 @@ function createFuckingClusterMarkers(){
   for(var i = 0; i < 1; i++)
   {
     var node_point = fuckingObj[i];
-    var title = node_point.id
+    var title = node_point.node_name
     var marker =  L.marker(new L.LatLng(node_point.location.coordinates[0], node_point.location.coordinates[1]),{
       title:title, icon: KLASSIcon
     });
-    marker.bindPopup("<bigtext>" + node_point.name + "</bigtext>" +
+    marker.bindPopup("<bigtext>" + node_point.node_name + "</bigtext>" +
         "<br><img src='images/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + node_point.data.temp + "°C" +
         "<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + node_point.data.humid + "%" ,  {
           maxWidth: "400"
