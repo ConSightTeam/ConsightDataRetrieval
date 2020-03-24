@@ -348,7 +348,9 @@ function createFuckingClusterMarkers(){
     });
     marker.bindPopup("<bigtext>" + node_point.name + "</bigtext>" +
         "<br><img src='images/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + node_point.data.temp + "°C" +
-        "<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + node_point.data.humid + "%" ,  {
+        "<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + node_point.data.humid + "%" +
+        "<br><img src='images/pm1icon.png' width='50px' height='50px'> <b>PM1:</b> " + node_point.data.pm1 +
+        "<br><img src='images/pm10icon.png' width='50px' height='50px'> <b>PM10:</b> " + node_point.data.pm10 , {
           maxWidth: "400"
         });
     markers3.addLayer(marker);
