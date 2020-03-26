@@ -10,8 +10,11 @@ export class DataPointRepository {
     async getLatest(): Promise<Array<DataPoint>> {
         await this.db.connect();
         let queryResult = await this.db.query(
-            'SELECT data_point.id, ST_ASGeoJson(data_point.location) AS location, data_point.data, data_point.node, data_point.inserted_on, node.name as node_name \
-            FROM data_point, node GROUP BY (data_point.node, data_point.id, node.name) ORDER BY data_point.inserted_on DESC LIMIT 1;'
+            'SELECT DISTINCT ON (data_point.node)\
+            data_point.id, ST_ASGeoJson(data_point.location) AS location, data_point.data, data_point.node, data_point.inserted_on, node.name AS node_name\
+            FROM   data_point, node\
+            WHERE  data_point.node = node.uuid\
+            ORDER  BY node, inserted_on DESC, id;'
         );
         await this.db.end();
         let result: Array<DataPoint> = [];
