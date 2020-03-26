@@ -339,16 +339,16 @@ function createFuckingClusterMarkers(){
   var markers3 = L.markerClusterGroup();
   var tempMarkerForLayer = [];
   //var tempLength = fuckingObj.length;
-  for(var i = 0; i < 2; i++)
-  {
-    var node_point = fuckingObj[i];
+  for(p in fuckingObj){
+    console.log("ทดสอบ2");
+    var node_point = fuckingObj[p];
     var title = node_point.node_name
     var marker =  L.marker(new L.LatLng(node_point.location.coordinates[0], node_point.location.coordinates[1]),{
       title:title, icon: KLASSIcon
     });
     marker.bindPopup("<bigtext>" + node_point.node_name + "</bigtext>" +
-        "<br><img src='images/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + node_point.data.temperature + "°C" +
-        "<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + node_point.data.humidity + "%" +
+        "<br><img src='images/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + node_point.data.temperature +
+        "<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + node_point.data.humidity +
         "<br><img src='images/pm1icon.png' width='50px' height='50px'> <b>PM1:</b> " + node_point.data.pm1 +
         "<br><img src='images/pm10icon.png' width='50px' height='50px'> <b>PM10:</b> " + node_point.data.pm10, {
           maxWidth: "400"
@@ -356,6 +356,7 @@ function createFuckingClusterMarkers(){
     markers3.addLayer(marker);
     tempMarkerForLayer.push(marker);
   }
+
   layerControl.addOverlay(markers3, "FuckingMarker555");
   mymap.addLayer(markers3);
 }
