@@ -58,6 +58,9 @@ function createMarkerHelper(icon){
     if (dataFromServer[i].data.hasOwnProperty('humidity')){
       html += "<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + dataFromServer[i].data.humidity;
     }
+    if (dataFromServer[i].data.hasOwnProperty('co_density')){
+      html += "<br><img src='images/sand.png' width='50px' height='50px'> <b>Density:</b> " + dataFromServer[i].data.co_density;
+    }
     if (dataFromServer[i].data.hasOwnProperty('pm1')){
       html += "<br><img src='images/pm1icon.png' width='50px' height='50px'> <b>PM1:</b> " + dataFromServer[i].data.pm1;
     }
