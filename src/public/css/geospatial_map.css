@@ -74,6 +74,11 @@ bigtext {
   color: #6d7fcc;
 }
 
+smalltext {
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .leaflet-retina .leaflet-control-layers-toggle {
   background-image: url("icons-000000@2x.png");
   background-size: 26px 26px;
