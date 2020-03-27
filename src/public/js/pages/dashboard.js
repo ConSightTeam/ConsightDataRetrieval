@@ -1,29 +1,4 @@
-/*
- * Author: Abdullah A Almsaeed
- * Date: 4 Jan 2014
- * Description:
- *      This is a demo file used only for the main dashboard (index.html)
- **/
-
- /*
- // เก็บไว้ก่อนชั่วคราว เดี๋ยวค่อยลบ
-console.log("ควย");
-var fuckingTest = document.getElementById("fuckingDataFromServer").innerText;
-console.log(fuckingTest);
-var fuckingObj = JSON.parse(fuckingTest);
-//[{"id":173,"location":{"type":"Point","coordinates":[13.727054,100.764894]},
-//"data":{"temp":"29.90","humid":"52.60"},"node":"6275c9d5-d106-4ea7-9d10-5b09835b4a12",
-//"inserted_on":"2020-02-22T04:45:21.156Z"}]
-
-console.log(fuckingObj[0].id);
-console.log(fuckingObj[0].location.coordinates[0]);
-console.log(fuckingObj[0].location.coordinates[1]);
-console.log(fuckingObj[0].data.temp);
-console.log(fuckingObj[0].data.humid);
- */
-
 $(function () {
-
   'use strict'
 
   // Make the dashboard widgets sortable Using jquery UI
@@ -357,124 +332,10 @@ function createFuckingClusterMarkers(){
     tempMarkerForLayer.push(marker);
   }
 
-  layerControl.addOverlay(markers3, "FuckingMarker555");
+  layerControl.addOverlay(markers3, "DataFromServer");
   mymap.addLayer(markers3);
 }
 
-
-function getAQIInfo()
-{
-	$.getJSON("https://lapsscentral.azurewebsites.net/api/sensors", function(data){
-		weatherData.forEach(function (e) {
-						//console.log( e.name + "\n PM 2.5 val: " + e.pm25Level +"\n PM 1.0 val: " + e.pm10Level+
-					//"\n Temp: " + e.temp + "\n Humidity:" + e.humidity );
-		});
-		createClusterMarkers();
-	});
-}
-
-function getNodeInfo() {
-    // Get data from server and store in 'array_marker'
-    $.getJSON("https://lapsscentral.azurewebsites.net/api/nodeinfos", function (data) {
-        nodesInfo = data
-				nodesInfo.forEach(function(e){
-					//console.log("Lat: " + e.latitude + " Lon: " + e.longitude );
-				});
-				getAQIInfo();
-    });
-}
-
-
-function getJangwad() {
-$.getJSON("https://flexibleiotplatquery.azurewebsites.net/api/v1", function (data) {
-		jangwad = data
-		jangwad.forEach(function(e) {
-			//console.log("Lat: " + e.geometry.coordinates );
-		});
-		create77JangwadMarker();
-	});
-}
-
-function create77JangwadMarker(){
-	var TMDWeatherIcon = L.icon({
-		iconUrl: 'images/weather_station.png',
-
-		iconSize:     [38, 50], // size of the icon
-		iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-		//popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-});
-	var markers2 = L.markerClusterGroup();
-	var tempMarkerForLayer = [];
-	for (var i = 0; i < jangwad.length; i++)
-	{
-		var jangwad_point = jangwad[i];
-		var title = jangwad_point.node
-		var marker2 =  L.marker(new L.LatLng(jangwad_point.geometry.coordinates[0], jangwad_point.geometry.coordinates[1]),{
-			title:title, icon:TMDWeatherIcon
-		});
-		marker2.bindPopup("<bigtext>" + jangwad_point.node + "</bigtext>" +
-						"<br><br><img src='images/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + jangwad_point.data.temperature + "°C" +
-						"<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + jangwad_point.data.humidity + "%" +
-						"<br><img src='images/gauge.png' width='50px' height='50px'> <b>Sea Level Pressure:</b> " + jangwad_point.data.seaLevelPressure + " mbar" +
-						"<br><img src='images/breeze.png' width='50px' height='50px'> <b>Wind Speed:</b> " + jangwad_point.data.windSpeed + " km/h" +
-						"<br><img src='images/rain.png' width='50px' height='50px'> <b>Rainfall:</b> " + jangwad_point.data.rainFall + " mm",
-						{maxWidth: "400",
-						className : 'custom-popup'})
-		markers2.addLayer(marker2);
-		tempMarkerForLayer.push(marker2);
-	}
-	layerControl.addOverlay(markers2, "Thai Meteorological Department");
-	mymap.addLayer(markers2);
-}
-
-function createClusterMarkers(){
-		var KLASSIcon = L.icon({
-	    iconUrl: 'images/KLASS.png',
-
-	    iconSize:     [38, 50], // size of the icon
-	    iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
-	    //popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
-	});
-    console.log("ทดสอบบบบบบบ");
-		// Create the markerClusterGroup here
-		var markers = L.markerClusterGroup();
-		var tempMarkerForLayer = [];
-		for(var i = 0; i < nodesInfo.length; i++)
-		{
-			var node_point = nodesInfo[i];
-			var title = node_point.name
-			//console.log(node_point.name+ " "+node_point.latitude + " "+ node_point.longitude);
-			var marker =  L.marker(new L.LatLng(node_point.latitude, node_point.longitude),{
-				title:title, icon: KLASSIcon
-			});
-
-			for(var j = 0; j < weatherData.length;j++)
-			{
-				var weather_sensor = weatherData[j];
-				if(weather_sensor.name== node_point.name)
-				{
-					marker.bindPopup("<bigtext>" + weather_sensor.name + "</bigtext>" +
-					"<br><br><img src='images/sand.png' width='50px' height='50px'> <b>PM 2.5:</b> " + weather_sensor.pm25Level + " ug/cm³" +
-					"<br><img src='images/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + weather_sensor.temp + "°C" +
-					"<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + weather_sensor.humidity + "%" ,  {
-						maxWidth: "400"
-					});
-				}
-				else{
-					marker.bindPopup("<bigtext> KLASS: " + title + "</bigtext>",  {
-						maxWidth: "auto"
-					});
-				}
-			}
-			markers.addLayer(marker);
-			tempMarkerForLayer.push(marker);
-		}
-		layerControl.addOverlay(markers, "KLASS");
-		mymap.addLayer(markers);
-}
-
-//getNodeInfo();
-//getJangwad();
 createFuckingClusterMarkers(); //เพิ่มเข้ามาใหม่ fucking
 
 function onMapClick(e) {
