@@ -17,12 +17,14 @@
     "gulp-uglifycss": "^1.1.0",
     "handlebars": "^4.7.6",
     "http-errors": "^1.7.3",
+    "icheck-bootstrap": "^3.0.1",
     "morgan": "^1.10.0",
     "pg": "^7.18.2"
   },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-csso": "^4.0.1",
+    "gulp-imagemin": "^7.1.0",
     "gulp-install": "^1.1.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "leaflet": "^1.6.0",

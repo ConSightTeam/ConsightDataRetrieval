@@ -1,8 +1,9 @@
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
-const install = require('gulp-install');
 const tsProject = ts.createProject('tsconfig.json');
-var uglifycss = require('gulp-uglifycss');
+const install = require('gulp-install');
+const uglifycss = require('gulp-uglifycss');
+const imagemin = require('gulp-imagemin');
 
 const PROD_DEST = 'dist';
 
@@ -41,6 +42,7 @@ function copyCSS() {
 
 function copyImages() {
     return gulp.src('src/resources/images/**/*.png')
+          .pipe(imagemin())
           .pipe(gulp.dest(PROD_DEST + '/public/images'));
 }
 
