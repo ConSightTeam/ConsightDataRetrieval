@@ -31,7 +31,7 @@ function public() {
 }
 
 function copyCSS() {
-    return gulp.src('src/css/**/*.css')
+    return gulp.src('src/resources/css/**/*.css')
           .pipe(uglifycss({
             "maxLineLen": 80,
             "uglyComments": true
@@ -39,9 +39,15 @@ function copyCSS() {
           .pipe(gulp.dest(PROD_DEST + '/public/css'));
 }
 
+function copyImages() {
+    return gulp.src('src/resources/images/**/*.png')
+          .pipe(gulp.dest(PROD_DEST + '/public/images'));
+}
+
 exports.transpile = transpile;
 exports.copyDependency = copyDependency;
 exports.copyHandlebars = copyHandlebars;
 exports.public = public;
 exports.copyCSS = copyCSS;
-exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, public, copyCSS);
+exports.copyImages = copyImages;
+exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, public, copyCSS, copyImages);

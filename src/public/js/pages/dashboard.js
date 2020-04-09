@@ -53,22 +53,22 @@ function createMarkerHelper(icon){
     html += "<br>[" + dataFromServer[i].location.coordinates[0] + ", " + dataFromServer[i].location.coordinates[1] + "]<br>";
 
     if (dataFromServer[i].data.hasOwnProperty('temperature')){
-      html += "<br><img src='images/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + dataFromServer[i].data.temperature;
+      html += "<br><img src='images/statusicon/thermometer.png' width='50px' height='50px'> <b>Temperature:</b> " + dataFromServer[i].data.temperature;
     }
     if (dataFromServer[i].data.hasOwnProperty('humidity')){
-      html += "<br><img src='images/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + dataFromServer[i].data.humidity;
+      html += "<br><img src='images/statusicon/humidity.png' width='50px' height='50px'> <b>Relative Humidity:</b> " + dataFromServer[i].data.humidity;
     }
     if (dataFromServer[i].data.hasOwnProperty('co_density')){
-      html += "<br><img src='images/sand.png' width='50px' height='50px'> <b>Density:</b> " + dataFromServer[i].data.co_density;
+      html += "<br><img src='images/statusicon/sand.png' width='50px' height='50px'> <b>Density:</b> " + dataFromServer[i].data.co_density;
     }
     if (dataFromServer[i].data.hasOwnProperty('pm1')){
-      html += "<br><img src='images/pm1icon.png' width='50px' height='50px'> <b>PM1:</b> " + dataFromServer[i].data.pm1;
+      html += "<br><img src='images/statusicon/pm1icon.png' width='50px' height='50px'> <b>PM1:</b> " + dataFromServer[i].data.pm1;
     }
     if (dataFromServer[i].data.hasOwnProperty('pm10')){
-      html += "<br><img src='images/pm10icon.png' width='50px' height='50px'> <b>PM10:</b> " + dataFromServer[i].data.pm10;
+      html += "<br><img src='images/statusicon/pm10icon.png' width='50px' height='50px'> <b>PM10:</b> " + dataFromServer[i].data.pm10;
     }
     if (dataFromServer[i].data.hasOwnProperty('pm2_5')){
-      html += "<br><img src='images/pm2_5icon.png' width='50px' height='50px'> <b>PM2.5:</b> " + dataFromServer[i].data.pm2_5;
+      html += "<br><img src='images/statusicon/pm2_5icon.png' width='50px' height='50px'> <b>PM2.5:</b> " + dataFromServer[i].data.pm2_5;
     }
 
     marker.bindPopup(html, {maxWidth: "400"});
@@ -93,4 +93,3 @@ function createFuckingClusterMarkers(){
 }
 
 createFuckingClusterMarkers(); //เพิ่มเข้ามาใหม่
-
