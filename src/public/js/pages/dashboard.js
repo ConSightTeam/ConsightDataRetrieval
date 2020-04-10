@@ -96,10 +96,18 @@ function creatHeatMaps()
 {
   console.log("Begin creating the heatmap")
   console.log("Retrieving data from back-end")
+  var dataFromServer = JSON.parse(document.getElementById("fuckingDataFromServer").innerText);
+  for (data in dataFromServer)
+  {
+    console.log("Node ลำกับที่ " + i);
+    console.log(dataFromServer[i]);
+  }
+
   var testData = {
     max: 8,
-    data: [{lat: 24.6408, lng:46.7728, count: 3},{lat: 50.75, lng:-1.55, count: 1}, ...]
+    data: [{lat: 24.6408, lng:46.7728, count: 3},{lat: 50.75, lng:-1.55, count: 1}]
   };
+  
   console.log("Finish data retrieval from back-end")
 
   var heatmap_config = {
@@ -127,4 +135,5 @@ function creatHeatMaps()
 }
 
 createHeatMaps()
+
 createFuckingClusterMarkers(); //เพิ่มเข้ามาใหม่
