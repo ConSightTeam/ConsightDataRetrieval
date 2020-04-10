@@ -92,7 +92,7 @@ function createFuckingClusterMarkers(){
   mymap.addLayer(getAllMarkersFromServer);
 }
 
-function creatHeatMaps()
+function createHeatMaps()
 {
   console.log("Begin creating the heatmap")
   console.log("Retrieving data from back-end")
