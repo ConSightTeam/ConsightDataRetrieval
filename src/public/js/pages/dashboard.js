@@ -99,8 +99,8 @@ function creatHeatMaps()
   var dataFromServer = JSON.parse(document.getElementById("fuckingDataFromServer").innerText);
   for (data in dataFromServer)
   {
-    console.log("Node ลำกับที่ " + i);
-    console.log(dataFromServer[i]);
+    console.log("Node ลำกับที่ " + data);
+    console.log(dataFromServer[data]);
   }
 
   var testData = {
