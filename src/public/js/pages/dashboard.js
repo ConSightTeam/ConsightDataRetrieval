@@ -108,6 +108,7 @@ function createHeatMaps()
     data: [{lat: 24.6408, lng:46.7728, count: 3},{lat: 50.75, lng:-1.55, count: 1}]
   };
   
+  console.log(testData)
   console.log("Finish data retrieval from back-end")
 
   var heatmap_config = {
