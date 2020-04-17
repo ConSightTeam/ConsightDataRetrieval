@@ -9,6 +9,7 @@ let hbs = exphbs.create();
 import * as indexRouter from './routes/index';
 import * as aboutRouter from './routes/about';
 import * as contactRouter from './routes/contact';
+import * as heatmapRouter from './routes/heatmap';
 
 let app = express();
 
@@ -25,5 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
+app.use('/heatmap', heatmapRouter);
 
 module.exports = app;
