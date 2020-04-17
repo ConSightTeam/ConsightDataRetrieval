@@ -27,14 +27,9 @@ var mymap = L.map('mapid').setView( [13.7291448, 100.7755224] , 10)
 
 var layerControl = L.control.layers(baseMaps, null).addTo(mymap);
 
-var nodesInfo = []
-var weatherData = []
-var selectedNode = 0
-var array_marker = []
-
 // A helper function to create a marker
 function createMarkerHelper(icon){
-  console.log("เริ่มดึงข้อมูลจาก server");
+  console.log("Function - CreateMarkerHelper -> เริ่มดึงข้อมูลจาก server");
   var dataFromServer = JSON.parse(document.getElementById("fuckingDataFromServer").innerText);
 
   // Create the markerClusterGroup here
@@ -91,50 +86,4 @@ function createFuckingClusterMarkers(){
   layerControl.addOverlay(getAllMarkersFromServer, "DataFromServer");
   mymap.addLayer(getAllMarkersFromServer);
 }
-
-function createHeatMaps()
-{
-  console.log("Begin creating the heatmap")
-  console.log("Retrieving data from back-end")
-  var dataFromServer = JSON.parse(document.getElementById("fuckingDataFromServer").innerText);
-  for (data in dataFromServer)
-  {
-    console.log("Node ลำกับที่ " + data);
-    console.log(dataFromServer[data]);
-  }
-
-  var testData = {
-    max: 8,
-    data: [{lat: 24.6408, lng:46.7728, count: 3},{lat: 50.75, lng:-1.55, count: 1}]
-  };
-  
-  console.log(testData)
-  console.log("Finish data retrieval from back-end")
-
-  var heatmap_config = {
-    // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-    // if scaleRadius is false it will be the constant radius used in pixels
-    "radius": 2,
-    "maxOpacity": .8,
-    // scales the radius based on map zoom
-    "scaleRadius": true,
-    // if set to false the heatmap uses the global maximum for colorization
-    // if activated: uses the data maximum within the current map boundaries
-    //   (there will always be a red spot with useLocalExtremas true)
-    "useLocalExtrema": true,
-    // which field name in your data represents the latitude - default "lat"
-    latField: 'lat',
-    // which field name in your data represents the longitude - default "lng"
-    lngField: 'lng',
-    // which field name in your data represents the data value - default "value"
-    valueField: 'count'
-  };
-  
-  var heatmapLayer = new HeatmapOverlay(heatmap_config)
-  heatmapLayer.setData(testData)
-  layerControl.addOverlay(heatmapLayer, "Heatmap")
-}
-
-createHeatMaps()
-
 createFuckingClusterMarkers(); //เพิ่มเข้ามาใหม่
