@@ -16,8 +16,10 @@
     "gulp-concat": "^2.6.1",
     "gulp-uglifycss": "^1.1.0",
     "handlebars": "^4.7.6",
+    "heatmap.js": "^2.0.5",
     "http-errors": "^1.7.3",
     "icheck-bootstrap": "^3.0.1",
+    "leaflet-heatmap": "^1.0.0",
     "morgan": "^1.10.0",
     "pg": "^7.18.2"
   },

@@ -27,14 +27,9 @@ var mymap = L.map('mapid').setView( [13.7291448, 100.7755224] , 10)
 
 var layerControl = L.control.layers(baseMaps, null).addTo(mymap);
 
-var nodesInfo = []
-var weatherData = []
-var selectedNode = 0
-var array_marker = []
-
 // A helper function to create a marker
 function createMarkerHelper(icon){
-  console.log("เริ่มดึงข้อมูลจาก server");
+  console.log("Function - CreateMarkerHelper -> เริ่มดึงข้อมูลจาก server");
   var dataFromServer = JSON.parse(document.getElementById("fuckingDataFromServer").innerText);
 
   // Create the markerClusterGroup here
@@ -91,5 +86,4 @@ function createFuckingClusterMarkers(){
   layerControl.addOverlay(getAllMarkersFromServer, "DataFromServer");
   mymap.addLayer(getAllMarkersFromServer);
 }
-
 createFuckingClusterMarkers(); //เพิ่มเข้ามาใหม่
