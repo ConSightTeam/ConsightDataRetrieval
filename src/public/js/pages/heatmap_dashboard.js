@@ -22,8 +22,7 @@ var baseMaps = {
 };
 
 L.mapbox.accessToken = my_access_token
-var mymap = L.map('mapid').setView( [13.7291448, 100.7755224] , 10)
-.addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+var mymap = L.map('mapid').setView( [13.7291448, 100.7755224] , 10).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
 
 var layerControl = L.control.layers(baseMaps, null).addTo(mymap);
 
@@ -43,7 +42,7 @@ function getSortNodeDataKey(nodeData)
     key_list.push(x);
   }
   key_list.sort(function(a,b){
-    return a == b ? 0 : (a > b ? 1 : -1)
+    return a == b ? 0 : (a > b ? 1 : -1);
   });
   return key_list;
 }
@@ -75,10 +74,10 @@ function getGeospatialAttrs()
 
   for(retrieved_data in dataFromServer)
   {
-    node_lat = dataFromServer[retrieved_data].location.coordinates[0]
-    node_lng = dataFromServer[retrieved_data].location.coordinates[1]
-    node_data = dataFromServer[retrieved_data].data
-    keys = []
+    node_lat = dataFromServer[retrieved_data].location.coordinates[0];
+    node_lng = dataFromServer[retrieved_data].location.coordinates[1];
+    node_data = dataFromServer[retrieved_data].data;
+    keys = [];
     var index = getSortNodeDataKey(node_data);
     for(var i = 0; i < index.length; i++)
     {
@@ -114,14 +113,14 @@ function findMax(geospatial_data)
 function createHeatMaps()
 {
 
-  console.log("Begin creating the heatmap")
-  console.log("Retrieving data from back-end")
+  console.log("Begin creating the heatmap");
+  console.log("Retrieving data from back-end");
   var heatmapLayers = [];
 
   var geospatial_data = getGeospatialAttrs();
   
   //console.log(testData)
-  console.log("Finish data retrieval from back-end")
+  console.log("Finish data retrieval from back-end");
 
   var heatmap_config = {
     // radius should be small ONLY if scaleRadius is true (or small radius is intended)
@@ -146,6 +145,7 @@ function createHeatMaps()
   for(each_attr in geospatial_data.attrs)
   {
     var new_layer = new HeatmapOverlay(heatmap_config);
+    console.log("Adding new HeatmapOverlay " + each_attr);
     heatmapLayers.push(new_layer);
   }
 
@@ -159,8 +159,8 @@ function createHeatMaps()
       max: findMax(geospatial_data.attrs[heatmap]),
       data: geospatial_data.attrs[heatmap]
     };
-
     heatmapLayers[heatmap].setData(tmp_data);
+    layerControl.addTo()
     layerControl.addOverlay(heatmapLayers[heatmap], geospatial_data.attr_key[heatmap]);
   }
 }
