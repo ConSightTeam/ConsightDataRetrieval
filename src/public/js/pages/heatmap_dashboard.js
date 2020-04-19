@@ -122,29 +122,34 @@ function createHeatMaps()
   //console.log(testData)
   console.log("Finish data retrieval from back-end");
 
-  var heatmap_config = {
-    // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-    // if scaleRadius is false it will be the constant radius used in pixels
-    "radius": 0.01,
-    "maxOpacity": .8,
-    // scales the radius based on map zoom
-    "scaleRadius": true,
-    // if set to false the heatmap uses the global maximum for colorization
-    // if activated: uses the data maximum within the current map boundaries
-    //   (there will always be a red spot with useLocalExtremas true)
-    "useLocalExtrema": false,
-    // which field name in your data represents the latitude - default "lat"
-    latField: 'lat',
-    // which field name in your data represents the longitude - default "lng"
-    lngField: 'lng',
-    // which field name in your data represents the data value - default "value"
-    valueField: 'value'
-  };
+  var heatmap_config_list = []
+  for(each_heatmap_config in geospatial_data.attrs)
+  {
+    var heatmap_config = {
+      // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+      // if scaleRadius is false it will be the constant radius used in pixels
+      "radius": 0.1,
+      "maxOpacity": .8,
+      // scales the radius based on map zoom
+      "scaleRadius": true,
+      // if set to false the heatmap uses the global maximum for colorization
+      // if activated: uses the data maximum within the current map boundaries
+      //   (there will always be a red spot with useLocalExtremas true)
+      "useLocalExtrema": false,
+      // which field name in your data represents the latitude - default "lat"
+      latField: 'lat',
+      // which field name in your data represents the longitude - default "lng"
+      lngField: 'lng',
+      // which field name in your data represents the data value - default "value"
+      valueField: 'value'
+    };
+    heatmap_config_list.push(heatmap_config);
+  }
 
   console.log("Init new HeatmapOverlay to the heatmap layers list");
   for(each_attr in geospatial_data.attrs)
   {
-    var new_layer = new HeatmapOverlay(heatmap_config);
+    var new_layer = new HeatmapOverlay(heatmap_config_list[each_attr]);
     console.log("Adding new HeatmapOverlay " + each_attr);
     heatmapLayers.push(new_layer);
   }
@@ -160,7 +165,6 @@ function createHeatMaps()
       data: geospatial_data.attrs[heatmap]
     };
     heatmapLayers[heatmap].setData(tmp_data);
-    layerControl.addTo()
     layerControl.addOverlay(heatmapLayers[heatmap], geospatial_data.attr_key[heatmap]);
   }
 }
