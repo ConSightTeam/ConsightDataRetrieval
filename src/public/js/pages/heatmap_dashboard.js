@@ -71,24 +71,28 @@ function getGeospatialAttrs()
   {
     geospatial_attrs.push([]);
   }
-
+  keys = [];
   for(retrieved_data in dataFromServer)
   {
     node_lat = dataFromServer[retrieved_data].location.coordinates[0];
     node_lng = dataFromServer[retrieved_data].location.coordinates[1];
     node_data = dataFromServer[retrieved_data].data;
-    keys = [];
     var index = getSortNodeDataKey(node_data);
     for(var i = 0; i < index.length; i++)
     {
+      console.log("Index")
+      console.log(index[i]);
+      keys.push(index[i]);
       raw_data = convertAttrToNumber(node_data[index[i]]);
       tmp = {lat: node_lat, lng: node_lng, value: parseFloat(raw_data[0])};
-      keys.push(index[i]);
-      geospatial_attrs[i].push(tmp);
+      geospatial_attrs[keys.indexOf(index[i])].push(tmp);
     }
   }
+
   console.log("Geospatial Attributes");
   console.log(geospatial_attrs);
+  console.log("Keys");
+  console.log(keys);
 
   return {attrs: geospatial_attrs, attr_key: keys};
 }
