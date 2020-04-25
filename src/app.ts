@@ -10,6 +10,7 @@ import * as indexRouter from './routes/index';
 import * as aboutRouter from './routes/about';
 import * as contactRouter from './routes/contact';
 import * as heatmapRouter from './routes/heatmap';
+import * as statisticRouter from './routes/statistic';
 
 let app = express();
 
@@ -27,5 +28,6 @@ app.use('/', indexRouter);
 app.use('/about', aboutRouter);
 app.use('/contact', contactRouter);
 app.use('/heatmap', heatmapRouter);
+app.use('/statistic', statisticRouter);
 
 module.exports = app;
