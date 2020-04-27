@@ -20,14 +20,15 @@
 
     <!-- Main content -->
     <div>
-        {{#unless statistic}}
+        {{#unless statistics}}
             <p>No Data</p>
         {{/unless}}
-        {{#with statistic }}
-            <p>Minimium: {{ minimum }}</p>
-            <p>Maximium: {{ maximum }}</p>
-            <p>Average: {{ average }}</p>
-        {{/with}}
+        {{#each statistics }}
+            <p>Date: {{ this.inserted_on_date }}</p>
+            <p>Minimium: {{ this.minimum }}</p>
+            <p>Maximium: {{ this.maximum }}</p>
+            <p>Average: {{ this.average }}</p>
+        {{/each}}
     </div>
     <!-- /.content -->
 </div>
