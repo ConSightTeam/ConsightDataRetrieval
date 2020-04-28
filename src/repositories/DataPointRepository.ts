@@ -20,6 +20,19 @@ export class DataPointRepository {
         return this.queryResultToDataPoint(queryResult);
     }
 
+    public async getFromSpecificTime(from: Date, to: Date): Promise<Array<DataPoint>> {
+        await this.db.connect();
+        let queryResult = await this.db.query(
+            'SELECT DISTINCT ON (data_point.node)\
+            data_point.id, ST_ASGeoJson(data_point.location) AS location, data_point.data, data_point.node, data_point.inserted_on, node.name AS node_name\
+            FROM   data_point, node\
+            WHERE  data_point.node = node.uuid AND data_point.inserted_on >= $1 AND data_point.inserted_on <= $2 \
+            ORDER  BY node, inserted_on DESC, id;', [from, to]
+        );
+        await this.db.end();
+        return this.queryResultToDataPoint(queryResult);
+    }
+
     public reset() {
         this.db = new Client();
     }
