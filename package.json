@@ -21,6 +21,7 @@
     "pg": "^7.18.2"
   },
   "devDependencies": {
+    "@types/pg": "^7.14.3",
     "admin-lte": "^3.0.4",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",

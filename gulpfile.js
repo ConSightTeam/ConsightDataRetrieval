@@ -52,7 +52,7 @@ function adminLTE_plugins() {
 
 function images() {
     return gulp.src('src/resources/images/**/*.png')
-          .pipe(imagemin())
+          .pipe(imagemin({imagemin}))
           .pipe(gulp.dest(PROD_DEST + '/public/images'));
 };
 
