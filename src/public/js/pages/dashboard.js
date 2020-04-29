@@ -66,6 +66,8 @@ function createMarkerHelper(icon){
       html += "<br><img src='images/statusicon/pm2_5icon.png' width='50px' height='50px'> <b>PM2.5:</b> " + dataFromServer[i].data.pm2_5;
     }
 
+    html += "<br>Node Owner: " + dataFromServer[i].owner + "<br>";
+
     marker.bindPopup(html, {maxWidth: "400"});
     markerGroups.addLayer(marker);
     tempMarkerForLayer.push(marker);

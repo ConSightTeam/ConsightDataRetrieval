@@ -4,4 +4,5 @@ class DataPoint {
     data: object;
     insertedOn: Date;
     nodeName?: string;
+    nodeOwner?: string;
 }
