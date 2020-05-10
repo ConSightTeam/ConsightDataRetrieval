@@ -4,7 +4,7 @@
         "outDir": "./dist",
         "allowJs": true,
         "target": "es2019",
-        "lib": ["es2020", "DOM"],
+        "lib": ["es2020"],
         "removeComments": true,
         "baseUrl": ".",
         "paths": {
@@ -15,5 +15,8 @@
     },
     "include": [
         "./src/**/*"
+    ],
+    "exclude": [
+        "src/public/**/*"
     ]
 }
