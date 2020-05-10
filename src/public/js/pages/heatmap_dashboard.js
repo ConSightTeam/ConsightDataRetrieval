@@ -18,7 +18,7 @@ var streets   = L.tileLayer(api_url, {
 
 var baseMaps = {
 	"Satellite": satellite,
-	"Streets": streets,
+	"Streets": streets
 };
 
 L.mapbox.accessToken = my_access_token
