@@ -1,0 +1,74 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">{{ display_property }} Statistic</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="./">Home</a></li>
+                        <li class="breadcrumb-item active">{{ display_property }} Statistic</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Quick summary of {{ display_property }}</h3>
+              </div>
+              <div class="card-body">
+                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+    <div>
+        {{#unless statistics}}
+            <p>No Data</p>
+        {{/unless}}
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Details</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Minimum</th>
+                      <th>Maximum</th>
+                      <th>Average</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each statistics }}
+                    <tr>
+                      <td>{{ this.inserted_on_date }}</td>
+                      <td>{{ this.minimum }}</td>
+                      <td>{{ this.maximum }}</td>
+                      <td>{{ this.average }}</td>
+                    </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+        
+    </div>
+    <!-- /.content -->
+</div>

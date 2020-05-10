@@ -9,14 +9,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#628284">
 
-    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
-    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">
-    <link rel="stylesheet" href="css/adminlte.min.css">
-    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
-    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
+    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
+    <link rel="stylesheet" href="/css/adminlte.min.css">
+    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -38,7 +38,7 @@
         rel='stylesheet' />
     <link href='https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css'
         rel='stylesheet' />
-    <link href='css/geospatial_map.css' rel='stylesheet' />
+    <link href='/css/geospatial_map.css' rel='stylesheet' />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
@@ -52,10 +52,10 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./" class="nav-link">Home</a>
+                    <a href="/" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="./contact" class="nav-link">Contact</a>
+                    <a href="/contact" class="nav-link">Contact</a>
                 </li>
             </ul>
 
@@ -79,8 +79,8 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index.html" class="brand-link">
-                <img src="images/UVISLogo_NoText.png" alt="UVIS logo" class="brand-image img-circle"
+            <a href="/" class="brand-link">
+                <img src="/images/UVISLogo_NoText.png" alt="UVIS logo" class="brand-image img-circle"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">ConSight™</span>
             </a>
@@ -94,7 +94,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="./" class="nav-link">
+                            <a href="/" class="nav-link">
                                 <i class="nav-icon fas fa-map"></i>
                                 <p>
                                     Geospatial Map
@@ -103,7 +103,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="./heatmap" class="nav-link">
+                            <a href="/heatmap" class="nav-link">
                                 <i class="nav-icon fas fa-map"></i>
                                 <p>
                                     Heat Map
@@ -115,34 +115,46 @@
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
-                                    Dashboard
+                                    Statistic
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./" class="nav-link">
+                                    <a href="/statistic/pm2_5/day" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v1</p>
+                                        <p>PM 2.5</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./" class="nav-link">
+                                    <a href="/statistic/pm10/day" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v2</p>
+                                        <p>PM 10</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./" class="nav-link">
+                                    <a href="/statistic/pm1/day" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
-                                        <p>Dashboard v3</p>
+                                        <p>PM 1</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/statistic/temperature/day" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Temperature</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/statistic/humidity/day" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Humidity</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
 
                         <li class="nav-item">
-                            <a href="./about" class="nav-link">
+                            <a href="/about" class="nav-link">
                                 <i class="nav-icon fas fa-user-circle"></i>
                                 <p>
                                     About
@@ -191,26 +203,88 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
     <script src="https://www.mapbox.com/mapbox.js/assets/data/realworld.388.js"></script>
-    <script src="plugins/jquery/jquery.min.js"></script>
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/plugins/jquery/jquery.min.js"></script>
+    <script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
     <script>$.widget.bridge('uibutton', $.ui.button)</script>
-    <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="plugins/chart.js/Chart.min.js"></script>
-    <script src="plugins/sparklines/sparkline.js"></script>
-    <script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-    <script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-    <script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-    <script src="plugins/moment/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script src="plugins/summernote/summernote-bs4.min.js"></script>
-    <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-    <script src="js/adminlte.js"></script>
-    <script src="js/pages/dashboard.js"></script>
+    <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/plugins/chart.js/Chart.min.js"></script>
+    <script src="/plugins/sparklines/sparkline.js"></script>
+    <script src="/plugins/jqvmap/jquery.vmap.min.js"></script>
+    <script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
+    <script src="/plugins/moment/moment.min.js"></script>
+    <script src="/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="/js/adminlte.js"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
 </body>
+<script>
+  $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
+    //-------------
+    //- BAR CHART -
+    //-------------
+      var areaChartData = {
+      labels  : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      datasets: [
+        {
+          label               : 'Maximum',
+          backgroundColor     : 'rgba(92,184,92,0.9)',
+          borderColor         : 'rgba(92,184,92,0.8)',
+          pointRadius          : false,
+          pointColor          : '#3b8bba',
+          pointStrokeColor    : 'rgba(92,184,92,1)',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(92,184,92,1)',
+          data                : [43, 40, 38, 36.5, 43, 45, 48]
+        },
+        {
+          label               : 'Minimum',
+          backgroundColor     : 'rgba(217,83,79, 1)',
+          borderColor         : 'rgba(217,83,79, 1)',
+          pointRadius         : false,
+          pointColor          : 'rgba(217,83,79, 1)',
+          pointStrokeColor    : '#c1c7d1',
+          pointHighlightFill  : '#fff',
+          pointHighlightStroke: 'rgba(220,220,220,1)',
+          data                : [22, 24, 20, 21, 22.5, 25, 23]
+        },
+      ]
+    }
 
+    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartData = jQuery.extend(true, {}, areaChartData)
+    var temp0 = areaChartData.datasets[0]
+    var temp1 = areaChartData.datasets[1]
+    barChartData.datasets[0] = temp1
+    barChartData.datasets[1] = temp0
+
+    var barChartOptions = {
+      responsive              : true,
+      maintainAspectRatio     : false,
+      datasetFill             : false,
+      scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
+            }
+        }]
+    }
+    }
+
+    var barChart = new Chart(barChartCanvas, {
+      type: 'bar', 
+      data: barChartData,
+      options: barChartOptions
+    })
+  })
+</script>
 </html>
