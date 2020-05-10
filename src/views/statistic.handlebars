@@ -4,12 +4,7 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-<<<<<<< HEAD
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">{{ display_property }} Statistic</h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-=======
+
                 <div class="col-sm-7">
                     <h1 class="m-0 text-dark">{{ display_property }} Statistic</h1>
                 </div><!-- /.col -->
@@ -35,7 +30,7 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-<<<<<<< HEAD
+
     <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Quick summary of {{ display_property }}</h3>
@@ -47,48 +42,13 @@
               </div>
               <!-- /.card-body -->
             </div>
-=======
-    <div class="row mb-2">
-      <div class="col-sm-6">
-    <div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title">Quick summary of {{ display_property }}</h3>
-      </div>
-      <div class="card-body">
-        <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
-        </div>
-      </div>
-      <!-- /.card-body -->
-    </div>
-    </div>
-    <div class="col-sm-6">
-    <div class="card card-primary">
-      <div class="card-header">
-        <h3 class="card-title">Line chart of {{ display_property }}</h3>
-      </div>
-      <div class="card-body">
-        <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-          <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 607px;" width="607" height="250" class="chartjs-render-monitor"></canvas>        </div>
-      </div>
-      <!-- /.card-body -->
-    </div>
-    </div>
-    </div>
-
-
->>>>>>> 0a3c606250d50296f6c50a68491f823ec7a48e19
     <div>
         {{#unless statistics}}
             <p>No Data</p>
         {{/unless}}
         <div class="row">
           <div class="col-12">
-<<<<<<< HEAD
             <div class="card">
-=======
-            <div class="card card-primary">
->>>>>>> 0a3c606250d50296f6c50a68491f823ec7a48e19
               <div class="card-header">
                 <h3 class="card-title">Details</h3>
               </div>
@@ -97,12 +57,7 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-<<<<<<< HEAD
-                      <th>Date</th>
-=======
-                      <th>#</th>
                       <th>Timestamp</th>
->>>>>>> 0a3c606250d50296f6c50a68491f823ec7a48e19
                       <th>Minimum</th>
                       <th>Maximum</th>
                       <th>Average</th>
@@ -111,10 +66,7 @@
                   <tbody>
                     {{#each statistics }}
                     <tr>
-<<<<<<< HEAD
-=======
                       <td>{{ @index }}</td>
->>>>>>> 0a3c606250d50296f6c50a68491f823ec7a48e19
                       <td>{{ this.inserted_on_date }}</td>
                       <td>{{ this.minimum }}</td>
                       <td>{{ this.maximum }}</td>
@@ -132,10 +84,8 @@
         
     </div>
     <!-- /.content -->
-<<<<<<< HEAD
 </div>
-=======
-</div>
+
 <script>
   console.log("{{display_property}}");
   console.log("{{statistics}}");
@@ -148,4 +98,4 @@
   console.log(ctx.barChartData);
 
 </script>
->>>>>>> 0a3c606250d50296f6c50a68491f823ec7a48e19
+
