@@ -83,7 +83,7 @@
                     {{#each statistics }}
                     <tr>
                       <td>{{ @index }}</td>
-                      <td>{{ this.inserted_on_date }}</td>
+                      <td>{{ this.inserted_on_date}}</td>
                       <td>{{ this.minimum }}</td>
                       <td>{{ this.maximum }}</td>
                       <td>{{ this.average }}</td>
@@ -101,16 +101,49 @@
     </div>
     <!-- /.content -->
 </div>
-
 <script>
-  console.log("{{display_property}}");
-  console.log("{{statistics}}");
-  console.log(JSON.stringify("{{statistics}}"));
-  console.log(JSON.stringify("{{statistics}}[0]"));
+  line_chart_data = []
+  bar_chart_max_data = []
+  bar_chart_min_data = []
+  label_chart_data = []
 
-  var ctx = document.getElementById('barChart').getContext("2d");
-  console.log(ctx);
-  console.log(ctx.data);
-  console.log(ctx.barChartData);
+  function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
+function formatTimestamp(txt){
+  res = txt.split(" ");
+  new_text = res[1] + " " + res[2] + " " + res[3]
+  return  new_text 
+}
+
+  {{#each statistics}}
+    label_chart_data.push(formatTimestamp("{{this.inserted_on_date}}"));
+    line_chart_data.push({{this.average}});
+    bar_chart_min_data.push({{this.minimum}});
+    bar_chart_max_data.push({{this.maximum}});
+  {{/each}}
+
+  console.log(line_chart_data);
+  console.log(bar_chart_min_data);
+  console.log(bar_chart_max_data);
+  console.log(label_chart_data);
+  console.log(lineChart)
+  console.log(barChart)
+
+  addData(lineChart, label_chart_data, line_chart_data)
+  addData(barChart, label_chart_data, bar_chart_max_data)
 
 </script>
