@@ -4,10 +4,19 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
+                <div class="col-sm-7">
                     <h1 class="m-0 text-dark">{{ display_property }} Statistic</h1>
                 </div><!-- /.col -->
-                <div class="col-sm-6">
+                <div class="col-sm-1">
+                 <a type="button" href="./hour" class="btn btn-block btn-primary">Hour</a>
+                </div><!-- /.col -->
+                <div class="col-sm-1">
+                 <a type="button" href="./day" class="btn btn-block btn-primary">Day</a>
+                </div><!-- /.col -->
+                <div class="col-sm-1">
+                 <a type="button" href="./month" class="btn btn-block btn-primary">Month</a>
+                </div><!-- /.col -->
+                <div class="col-sm-2">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
                         <li class="breadcrumb-item active">{{ display_property }} Statistic</li>
@@ -19,24 +28,42 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Quick summary of {{ display_property }}</h3>
-              </div>
-              <div class="card-body">
-                <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
-                </div>
-              </div>
-              <!-- /.card-body -->
-            </div>
+    <div class="row mb-2">
+      <div class="col-sm-6">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Quick summary of {{ display_property }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    </div>
+    <div class="col-sm-6">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Line chart of {{ display_property }}</h3>
+      </div>
+      <div class="card-body">
+        <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+          <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 607px;" width="607" height="250" class="chartjs-render-monitor"></canvas>        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    </div>
+    </div>
+
+
     <div>
         {{#unless statistics}}
             <p>No Data</p>
         {{/unless}}
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card card-primary">
               <div class="card-header">
                 <h3 class="card-title">Details</h3>
               </div>
@@ -45,7 +72,8 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>Date</th>
+                      <th>#</th>
+                      <th>Timestamp</th>
                       <th>Minimum</th>
                       <th>Maximum</th>
                       <th>Average</th>
@@ -54,6 +82,7 @@
                   <tbody>
                     {{#each statistics }}
                     <tr>
+                      <td>{{ @index }}</td>
                       <td>{{ this.inserted_on_date }}</td>
                       <td>{{ this.minimum }}</td>
                       <td>{{ this.maximum }}</td>
@@ -72,3 +101,15 @@
     </div>
     <!-- /.content -->
 </div>
+<script>
+  console.log("{{display_property}}");
+  console.log("{{statistics}}");
+  console.log(JSON.stringify("{{statistics}}"));
+  console.log(JSON.stringify("{{statistics}}[0]"));
+
+  var ctx = document.getElementById('barChart').getContext("2d");
+  console.log(ctx);
+  console.log(ctx.data);
+  console.log(ctx.barChartData);
+
+</script>

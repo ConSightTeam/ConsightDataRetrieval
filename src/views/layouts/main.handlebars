@@ -218,73 +218,10 @@
     <script src="/plugins/summernote/summernote-bs4.min.js"></script>
     <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="/js/adminlte.js"></script>
+    <script src="/js/chartdata.js"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
 </body>
-<script>
-  $(function () {
-    /* ChartJS
-     * -------
-     * Here we will create a few charts using ChartJS
-     */
-    //-------------
-    //- BAR CHART -
-    //-------------
-      var areaChartData = {
-      labels  : ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-      datasets: [
-        {
-          label               : 'Maximum',
-          backgroundColor     : 'rgba(92,184,92,0.9)',
-          borderColor         : 'rgba(92,184,92,0.8)',
-          pointRadius          : false,
-          pointColor          : '#3b8bba',
-          pointStrokeColor    : 'rgba(92,184,92,1)',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(92,184,92,1)',
-          data                : [43, 40, 38, 36.5, 43, 45, 48]
-        },
-        {
-          label               : 'Minimum',
-          backgroundColor     : 'rgba(217,83,79, 1)',
-          borderColor         : 'rgba(217,83,79, 1)',
-          pointRadius         : false,
-          pointColor          : 'rgba(217,83,79, 1)',
-          pointStrokeColor    : '#c1c7d1',
-          pointHighlightFill  : '#fff',
-          pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : [22, 24, 20, 21, 22.5, 25, 23]
-        },
-      ]
-    }
-
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
-    var barChartData = jQuery.extend(true, {}, areaChartData)
-    var temp0 = areaChartData.datasets[0]
-    var temp1 = areaChartData.datasets[1]
-    barChartData.datasets[0] = temp1
-    barChartData.datasets[1] = temp0
-
-    var barChartOptions = {
-      responsive              : true,
-      maintainAspectRatio     : false,
-      datasetFill             : false,
-      scales: {
-        yAxes: [{
-            ticks: {
-                beginAtZero: true
-            }
-        }]
-    }
-    }
-
-    var barChart = new Chart(barChartCanvas, {
-      type: 'bar', 
-      data: barChartData,
-      options: barChartOptions
-    })
-  })
-</script>
 </html>
