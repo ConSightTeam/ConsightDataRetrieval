@@ -1,10 +1,10 @@
-$(function () {
+
     //--------------
     //- AREA CHART -
     //--------------
 
     var areaChartData = {
-      labels  : [],
+      labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
           label               : 'Digital Goods',
@@ -15,7 +15,7 @@ $(function () {
           pointStrokeColor    : 'rgba(60,141,188,1)',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(60,141,188,1)',
-          data                : []
+          data                : [28, 48, 40, 19, 86, 27, 90]
         },
         {
           label               : 'Electronics',
@@ -26,7 +26,7 @@ $(function () {
           pointStrokeColor    : '#c1c7d1',
           pointHighlightFill  : '#fff',
           pointHighlightStroke: 'rgba(220,220,220,1)',
-          data                : []
+          data                : [65, 59, 80, 81, 56, 55, 40]
         },
       ]
     }
@@ -54,7 +54,12 @@ $(function () {
     //-------------
     //- LINE CHART -
     //--------------
-    var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+
+    var lineChartCanvas = document.getElementById('lineChart')
+    console.log("chart_data : lineChartCanvas")
+    console.log(lineChartCanvas)
+
+    var line_ctx = lineChartCanvas.getContext('2d')
     var lineChartOptions = jQuery.extend(true, {}, areaChartOptions)
     var lineChartData = jQuery.extend(true, {}, areaChartData)
     for(i = 0; i < lineChartData.datasets.length; i++)
@@ -64,7 +69,7 @@ $(function () {
 
     lineChartOptions.datasetFill = false
 
-    var lineChart = new Chart(lineChartCanvas, { 
+    var lineChart = new Chart(line_ctx, { 
       type: 'line',
       data: lineChartData, 
       options: lineChartOptions
@@ -73,11 +78,13 @@ $(function () {
     //-------------
     //- BAR CHART -
     //-------------
-    var barChartCanvas = $('#barChart').get(0).getContext('2d')
+    var barChartCanvas = document.getElementById('barChart')
+    console.log("chart_data : barChartCanvas")
+    console.log(barChartCanvas)
 
-    var barChart = new Chart(barChartCanvas, {
+    var bar_ctx = barChartCanvas.getContext('2d')
+    var barChart = new Chart(bar_ctx, {
       type: 'bar', 
       data: areaChartData,
       options: areaChartOptions
     })
-});

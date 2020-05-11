@@ -35,8 +35,21 @@
         <h3 class="card-title">Quick summary of {{ display_property }}</h3>
       </div>
       <div class="card-body">
-        <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
+        <div class="chart">
+          <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand">
+              <div class="">
+
+              </div>
+              </div>
+              <div class="chartjs-size-monitor-shrink">
+                <div class="">
+                </div>
+              </div>
+            </div>
+          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor">
+
+          </canvas>
         </div>
       </div>
       <!-- /.card-body -->
@@ -140,10 +153,53 @@ function formatTimestamp(txt){
   console.log(bar_chart_min_data);
   console.log(bar_chart_max_data);
   console.log(label_chart_data);
-  console.log(lineChart)
-  console.log(barChart)
+  console.log("stats -> barchart")
+  console.log(barChart);
+  console.log("stats -> linechart")
+  console.log(lineChart);
 
-  addData(lineChart, label_chart_data, line_chart_data)
-  addData(barChart, label_chart_data, bar_chart_max_data)
+  visualised_line_chart_data = {
+      labels: [],
+      datasets:[{
+            label               : 'line chart',
+            backgroundColor     : 'rgba(60,141,188,0.9)',
+            borderColor         : 'rgba(60,141,188,0.8)',
+            pointRadius          : false,
+            pointColor          : '#3b8bba',
+            pointStrokeColor    : 'rgba(60,141,188,1)',
+            pointHighlightFill  : '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data                : line_chart_data
+      }]
+  }
+
+    visualised_bar_chart_data = {
+      labels: [],
+      datasets:[{
+            label               : 'barchart max chart',
+            backgroundColor     : 'rgba(60,141,188,0.9)',
+            borderColor         : 'rgba(60,141,188,0.8)',
+            pointRadius          : false,
+            pointColor          : '#3b8bba',
+            pointStrokeColor    : 'rgba(60,141,188,1)',
+            pointHighlightFill  : '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data                : bar_chart_max_data
+      },
+      {
+            label               : 'barchart min chart',
+            backgroundColor     : 'rgba(210, 214, 222, 1)',
+            borderColor         : 'rgba(210, 214, 222, 1)',
+            pointRadius          : false,
+            pointColor          : '#c1c7d1',
+            pointStrokeColor    : 'rgba(210, 214, 222, 1)',
+            pointHighlightFill  : '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data                : bar_chart_min_data
+      }
+      ]
+  }
+  addData(lineChart, label_chart_data, visualised_line_chart_data)
+  addData(barChart, label_chart_data, visualised_bar_chart_data)
 
 </script>
