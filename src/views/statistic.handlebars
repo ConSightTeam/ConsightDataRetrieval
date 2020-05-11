@@ -32,18 +32,18 @@
       <div class="col-sm-6">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Quick summary of {{ display_property }}</h3>
+        <h3 class="card-title">{{ display_property }} Minimum and Maximum</h3>
       </div>
       <div class="card-body">
         <div class="chart">
           <div class="chartjs-size-monitor">
             <div class="chartjs-size-monitor-expand">
-              <div class="">
+              <div class="x">
 
               </div>
               </div>
               <div class="chartjs-size-monitor-shrink">
-                <div class="">
+                <div class="x">
                 </div>
               </div>
             </div>
@@ -58,7 +58,7 @@
     <div class="col-sm-6">
     <div class="card card-primary">
       <div class="card-header">
-        <h3 class="card-title">Line chart of {{ display_property }}</h3>
+        <h3 class="card-title">{{ display_property }} Average</h3>
       </div>
       <div class="card-body">
         <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
@@ -114,13 +114,14 @@
     </div>
     <!-- /.content -->
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
-  line_chart_data = []
+  line_chart_average_data = []
   bar_chart_max_data = []
   bar_chart_min_data = []
   label_chart_data = []
 
-  function addData(chart, label, data) {
+function addData(chart, label, data) {
     chart.data.labels.push(label);
     chart.data.datasets.forEach((dataset) => {
         dataset.data.push(data);
@@ -142,24 +143,24 @@ function formatTimestamp(txt){
   return  new_text 
 }
 
+function formatAverageValue(num){
+  return num.toFixed(2);
+}
+
   {{#each statistics}}
     label_chart_data.push(formatTimestamp("{{this.inserted_on_date}}"));
-    line_chart_data.push({{this.average}});
+    line_chart_average_data.push(formatAverageValue({{this.average}}));
     bar_chart_min_data.push({{this.minimum}});
     bar_chart_max_data.push({{this.maximum}});
   {{/each}}
 
-  console.log(line_chart_data);
+  console.log(line_chart_average_data);
   console.log(bar_chart_min_data);
   console.log(bar_chart_max_data);
   console.log(label_chart_data);
-  console.log("stats -> barchart")
-  console.log(barChart);
-  console.log("stats -> linechart")
-  console.log(lineChart);
 
-  visualised_line_chart_data = {
-      labels: [],
+  visualised_line_chart_average_data = {
+      labels: label_chart_data,
       datasets:[{
             label               : 'line chart',
             backgroundColor     : 'rgba(60,141,188,0.9)',
@@ -169,12 +170,12 @@ function formatTimestamp(txt){
             pointStrokeColor    : 'rgba(60,141,188,1)',
             pointHighlightFill  : '#fff',
             pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : line_chart_data
+            data                : line_chart_average_data
       }]
   }
 
     visualised_bar_chart_data = {
-      labels: [],
+      labels: label_chart_data,
       datasets:[{
             label               : 'barchart max chart',
             backgroundColor     : 'rgba(60,141,188,0.9)',
@@ -199,7 +200,106 @@ function formatTimestamp(txt){
       }
       ]
   }
-  addData(lineChart, label_chart_data, visualised_line_chart_data)
-  addData(barChart, label_chart_data, visualised_bar_chart_data)
 
+  //Barchart
+  var barChartData = {
+    labels  : label_chart_data,
+    datasets: [
+      {
+        label               : 'Minimum',
+        backgroundColor     : '#ced4da',
+        borderColor         : '#ced4da',
+        pointRadius          : false,
+        pointColor          : '#3b8bba',
+        pointStrokeColor    : 'rgba(60,141,188,1)',
+        pointHighlightFill  : '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data                : bar_chart_min_data
+      },
+      {
+        label               : 'Maximum',
+        backgroundColor     : '#007bff',
+        borderColor         : '#007bff',
+        pointRadius         : false,
+        pointColor          : '#007bff',
+        pointStrokeColor    : '#c1c7d1',
+        pointHighlightFill  : '#fff',
+        pointHighlightStroke: 'rgba(220,220,220,1)',
+        data                : bar_chart_max_data
+      },
+    ]
+  }
+
+  var barChartOptions = {
+    responsive              : true,
+    maintainAspectRatio     : false,
+    datasetFill             : false
+  }
+
+  // Line chart
+  var lineChartData = {
+  labels  : label_chart_data,
+  datasets: [
+    {
+      label               : 'Average',
+      fill                : false,
+      backgroundColor     : '#007bff',
+      borderColor         : '#007bff',
+      pointRadius         : false,
+      pointColor          : '#007bff',
+      pointStrokeColor    : 'rgba(60,141,188,1)',
+      pointHighlightFill  : '#fff',
+      pointHighlightStroke: 'rgba(60,141,188,1)',
+      data                : line_chart_average_data
+    },
+  ]
+}
+
+var lineChartOptions = {
+    maintainAspectRatio : false,
+    responsive : true,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      mode: 'index',
+      intersect: false,
+    },
+    hover: {
+      mode: 'nearest',
+      intersect: true
+    },
+    scales: {
+      xAxes: [{
+        gridLines : {
+          display : false,
+        }
+      }],
+      yAxes: [{
+        gridLines : {
+          display : false,
+        }
+      }]
+    }
+  }
+
+  // Initialize Bar chart
+  var bar_ctx = document.getElementById('barChart').getContext('2d');
+  var barChart = new Chart(bar_ctx, {
+    type: 'bar', 
+    data: barChartData,
+    options: barChartOptions
+  });
+
+  // Initialize Line chart
+  var line_ctx = document.getElementById('lineChart').getContext('2d');
+  var lineChart = new Chart(line_ctx, { 
+    type: 'line',
+    data: lineChartData, 
+    options: lineChartOptions
+  });
+
+  //addData(barChart, label_chart_data, visualised_bar_chart_data);
+  //addData(lineChart, label_chart_data, visualised_line_chart_average_data);
+  console.log("END OF GRAPH SCRIPT");
 </script>
