@@ -33,7 +33,7 @@
     <div class="card card-primary">
       <div class="card-header">
         <h3 class="card-title">{{ display_property }} Minimum and Maximum</h3>
-      </div>
+        </div>
       <div class="card-body">
         <div class="chart">
           <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
@@ -116,7 +116,7 @@
 
 function formatTimestamp(txt){
   res = txt.split(" ");
-  new_text = res[1] + " " + res[2] + " " + res[3];
+  new_text = res[1] + " " + res[2] + " " + res[3] + " " + res[4] + " " + res[5];
   return new_text 
 }
 
@@ -169,7 +169,24 @@ function formatTimestamp(txt){
   var barChartOptions = {
     responsive              : true,
     maintainAspectRatio     : false,
-    datasetFill             : false
+    datasetFill             : false, 
+    scales: {
+      xAxes: [{
+        ticks : {
+          display : false,
+        },
+          scaleLabel: {
+          display: true,
+          labelString: 'time' + " (" + ")" // Insert the mode here
+        },
+      }],
+      yAxes: [{        
+        scaleLabel: {
+          display: true,
+          labelString: "{{ display_property }}" + " (" + ")" // Insert the unit here
+        }
+      }]
+    }
   }
 
   // Line chart
@@ -207,14 +224,19 @@ function formatTimestamp(txt){
     },
     scales: {
       xAxes: [{
-        gridLines : {
+        scaleLabel: {
+          display: true,
+          labelString: 'time' + " (" + ")" // Insert the mode here
+        },
+        ticks : {
           display : false,
-        }
+        },
       }],
       yAxes: [{
-        gridLines : {
-          display : false,
-        }
+        scaleLabel: {
+          display: true,
+          labelString: "{{ display_property }}" + " (" + ")" // Insert the unit here
+        },
       }]
     }
   }
