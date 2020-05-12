@@ -162,6 +162,13 @@ function createHeatMaps()
     heatmapLayers[heatmap].setData(tmp_data);
     overlayMaps[geospatial_data.attr_key[heatmap]] = heatmapLayers[heatmap];
   }
+  //  Layer control to select only 1 heatmap overlay at a time
+
+  // To execute the statement below, the library leaflet-groupedlayercontrol must be installed !
+  // URL: https://github.com/ismyrnow/leaflet-groupedlayercontrol
+
+  //Reference: https://gis.stackexchange.com/questions/267605/leaflet-api-select-one-overlay-at-a-time-like-base-layers
+  
   // var options = {      
   //   // Make the "Landmarks" group exclusive (use radio inputs)
   //   exclusiveGroups: ["Reprensitives"],
@@ -171,6 +178,7 @@ function createHeatMaps()
   // var layerControl = L.control.groupedLayers(baseMaps, overlayMaps, options);
   // mymap.addControl(layerControl);
 
+  // Without the leaflet-groupedlatercontrol, use the source code below
   L.control.layers(baseMaps).addTo(mymap);
   L.control.layers(overlayMaps).addTo(mymap);
 }
