@@ -36,23 +36,9 @@
       </div>
       <div class="card-body">
         <div class="chart">
-          <div class="chartjs-size-monitor">
-            <div class="chartjs-size-monitor-expand">
-              <div class="x">
-
-              </div>
-              </div>
-              <div class="chartjs-size-monitor-shrink">
-                <div class="x">
-                </div>
-              </div>
-            </div>
-          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor">
-
-          </canvas>
+          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
         </div>
       </div>
-      <!-- /.card-body -->
     </div>
     </div>
     <div class="col-sm-6">
@@ -61,18 +47,17 @@
         <h3 class="card-title">{{ display_property }} Average</h3>
       </div>
       <div class="card-body">
-        <div class="chart"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-          <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 607px;" width="607" height="250" class="chartjs-render-monitor"></canvas>        </div>
+        <div class="chart">
+          <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 607px;" width="607" height="250" class="chartjs-render-monitor"></canvas>        
+        </div>
       </div>
-      <!-- /.card-body -->
     </div>
     </div>
     </div>
-
 
     <div>
         {{#unless statistics}}
-            <p>No Data</p>
+          <p>No Data</p>
         {{/unless}}
         <div class="row">
           <div class="col-12">
@@ -80,7 +65,6 @@
               <div class="card-header">
                 <h3 class="card-title">Details</h3>
               </div>
-              <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                   <thead>
@@ -92,28 +76,37 @@
                       <th>Average</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    {{#each statistics }}
-                    <tr>
-                      <td>{{ @index }}</td>
-                      <td>{{ this.inserted_on_date}}</td>
-                      <td>{{ this.minimum }}</td>
-                      <td>{{ this.maximum }}</td>
-                      <td>{{ this.average }}</td>
-                    </tr>
-                    {{/each}}
+                  <!-- The data in each row is manipulated by dataInTable function in Javascript below -->
+                  <tbody id="TableRow">
                   </tbody>
                 </table>
               </div>
-              <!-- /.card-body -->
             </div>
-            <!-- /.card -->
           </div>
         </div>
-        
     </div>
-    <!-- /.content -->
 </div>
+
+<script>
+  // Manipulate data in the table, change from default format to human-readable format.
+  function formatIndexValue(num){
+    return num + 1;
+  }
+
+  function formatAverageValue(num){
+    return num.toFixed(4);
+  }
+
+  dataInTable = '';
+
+  {{#each statistics}}
+    dataInTable += '<tr><td>' + formatIndexValue({{ @index }}) + '</td><td>{{this.inserted_on_date}}</td><td>{{ this.minimum }}</td><td>{{ this.maximum }}</td><td>' + formatAverageValue({{ this.average }}) + '</td></tr>'
+  {{/each}}
+
+  // Insert the manipulated data in HTML (id = TableRow)
+  document.getElementById('TableRow').innerHTML = dataInTable;
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
   line_chart_average_data = []
@@ -121,35 +114,15 @@
   bar_chart_min_data = []
   label_chart_data = []
 
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-    chart.update();
-}
-
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
-    chart.update();
-}
-
 function formatTimestamp(txt){
   res = txt.split(" ");
-  new_text = res[1] + " " + res[2] + " " + res[3]
-  return  new_text 
-}
-
-function formatAverageValue(num){
-  return num.toFixed(2);
+  new_text = res[1] + " " + res[2] + " " + res[3];
+  return new_text 
 }
 
   {{#each statistics}}
     label_chart_data.push(formatTimestamp("{{this.inserted_on_date}}"));
-    line_chart_average_data.push(formatAverageValue({{this.average}}));
+    line_chart_average_data.push({{this.average}}.toFixed(2));
     bar_chart_min_data.push({{this.minimum}});
     bar_chart_max_data.push({{this.maximum}});
   {{/each}}
@@ -218,7 +191,7 @@ function formatAverageValue(num){
   ]
 }
 
-var lineChartOptions = {
+  var lineChartOptions = {
     maintainAspectRatio : false,
     responsive : true,
     legend: {
