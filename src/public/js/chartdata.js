@@ -83,6 +83,7 @@
     console.log(barChartCanvas)
 
     var bar_ctx = barChartCanvas.getContext('2d')
+    
     var barChart = new Chart(bar_ctx, {
       type: 'bar', 
       data: areaChartData,

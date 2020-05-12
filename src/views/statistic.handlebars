@@ -159,47 +159,10 @@ function formatAverageValue(num){
   console.log(bar_chart_max_data);
   console.log(label_chart_data);
 
-  visualised_line_chart_average_data = {
-      labels: label_chart_data,
-      datasets:[{
-            label               : 'line chart',
-            backgroundColor     : 'rgba(60,141,188,0.9)',
-            borderColor         : 'rgba(60,141,188,0.8)',
-            pointRadius          : false,
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : line_chart_average_data
-      }]
-  }
-
-    visualised_bar_chart_data = {
-      labels: label_chart_data,
-      datasets:[{
-            label               : 'barchart max chart',
-            backgroundColor     : 'rgba(60,141,188,0.9)',
-            borderColor         : 'rgba(60,141,188,0.8)',
-            pointRadius          : false,
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : bar_chart_max_data
-      },
-      {
-            label               : 'barchart min chart',
-            backgroundColor     : 'rgba(210, 214, 222, 1)',
-            borderColor         : 'rgba(210, 214, 222, 1)',
-            pointRadius          : false,
-            pointColor          : '#c1c7d1',
-            pointStrokeColor    : 'rgba(210, 214, 222, 1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(220,220,220,1)',
-            data                : bar_chart_min_data
-      }
-      ]
-  }
+  line_chart_average_data = line_chart_average_data.reverse()
+  bar_chart_max_data = bar_chart_max_data.reverse()
+  bar_chart_min_data = bar_chart_min_data.reverse()
+  label_chart_data = label_chart_data.reverse()
 
   //Barchart
   var barChartData = {
@@ -299,7 +262,5 @@ var lineChartOptions = {
     options: lineChartOptions
   });
 
-  //addData(barChart, label_chart_data, visualised_bar_chart_data);
-  //addData(lineChart, label_chart_data, visualised_line_chart_average_data);
   console.log("END OF GRAPH SCRIPT");
 </script>
