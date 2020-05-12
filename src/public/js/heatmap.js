@@ -55,14 +55,31 @@ function getGeospatialAttrs()
     var index = getSortNodeDataKey(node_data);
     for(var i = 0; i < index.length; i++)
     {
-      console.log("Index")
-      console.log(index[i]);
       keys.push(index[i]);
       raw_data = convertAttrToNumber(node_data[index[i]]);
       tmp = {lat: node_lat, lng: node_lng, value: parseFloat(raw_data[0])};
       geospatial_attrs[keys.indexOf(index[i])].push(tmp);
     }
   }
+
+  console.log("Keys");
+  console.log(keys);
+
+
+  // for(i = 0; i < geospatial_attrs.length; i++){
+  //   if(geospatial_attrs[i].length == 0){
+  //     geospatial_attrs.splice(i, 1);
+  //   }
+  // }
+
+  geospatial_attrs = geospatial_attrs.filter(function(item){
+      return item.length != 0;
+  });
+
+  keys = keys.filter(function(item, index){
+    return keys.indexOf(item) >= index;
+  });
+
 
   console.log("Geospatial Attributes");
   console.log(geospatial_attrs);
