@@ -1,6 +1,8 @@
-var mymap = L.map('mapid').setView( [13.7291448, 100.7755224] , 10).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11'));
+var mymap = L.map('mapid').setView( 
+  [13.7291448, 100.7755224] , 10).addLayer(L.mapbox.styleLayer('mapbox://styles/mapbox/streets-v11')
+  );
 
-var layerControl = L.control.layers(baseMaps, null).addTo(mymap);
+var overlayMaps = {};
 
 var geospatial_attrs = [];
 
@@ -65,17 +67,12 @@ function getGeospatialAttrs()
   console.log("Keys");
   console.log(keys);
 
-
-  // for(i = 0; i < geospatial_attrs.length; i++){
-  //   if(geospatial_attrs[i].length == 0){
-  //     geospatial_attrs.splice(i, 1);
-  //   }
-  // }
-
+  //  Remove empty list of geospatial attributes
   geospatial_attrs = geospatial_attrs.filter(function(item){
       return item.length != 0;
   });
-
+  
+  // Remove duplicates from keys
   keys = keys.filter(function(item, index){
     return keys.indexOf(item) >= index;
   });
@@ -90,12 +87,14 @@ function getGeospatialAttrs()
 }
 
 function convertAttrToNumber(attr){
+  // Convert attrs string to number
   var res = attr.split(" ");
   return res;
 }
 
 function findMax(geospatial_data)
 {
+  // Find the maximum value of values from specific sensor type/
   let max = -999999;
   geospatial_data.forEach(attr => {
   if (attr.value > max) {
@@ -161,8 +160,19 @@ function createHeatMaps()
       data: geospatial_data.attrs[heatmap]
     };
     heatmapLayers[heatmap].setData(tmp_data);
-    layerControl.addOverlay(heatmapLayers[heatmap], geospatial_data.attr_key[heatmap]);
+    overlayMaps[geospatial_data.attr_key[heatmap]] = heatmapLayers[heatmap];
   }
+  // var options = {      
+  //   // Make the "Landmarks" group exclusive (use radio inputs)
+  //   exclusiveGroups: ["Reprensitives"],
+  //   // Show a checkbox next to non-exclusive group labels for toggling all
+  //   groupCheckboxes: true
+  // }
+  // var layerControl = L.control.groupedLayers(baseMaps, overlayMaps, options);
+  // mymap.addControl(layerControl);
+
+  L.control.layers(baseMaps).addTo(mymap);
+  L.control.layers(overlayMaps).addTo(mymap);
 }
 
 createHeatMaps()
