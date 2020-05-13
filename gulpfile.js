@@ -66,6 +66,11 @@ function leaflet_heatmap_plugin() {
         .pipe(gulp.dest(PROD_DEST + '/public/plugins/heatmap'));
 };
 
+function leaflet_groupedlayercontrol_plugin() {
+    return gulp.src('node_modules/leaflet-groupedlayercontrol/src/*.*')
+        .pipe(gulp.dest(PROD_DEST + '/public/plugins/leaflet-groupedlayercontrol'));
+};
+
 exports.transpile = transpile;
 exports.copyDependency = copyDependency;
 exports.copyHandlebars = copyHandlebars;
@@ -76,4 +81,5 @@ exports.adminLTE_js = adminLTE_js;
 exports.adminLTE_plugins = adminLTE_plugins;
 exports.heatmap_plugin = heatmap_plugin;
 exports.leaflet_heatmap_plugin = leaflet_heatmap_plugin;
-exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, adminLTE_css, adminLTE_js, adminLTE_plugins, css, images, heatmap_plugin, leaflet_heatmap_plugin);
+exports.leaflet_groupedlayercontrol_plugin = leaflet_groupedlayercontrol_plugin;
+exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, adminLTE_css, adminLTE_js, adminLTE_plugins, css, images, heatmap_plugin, leaflet_heatmap_plugin, leaflet_groupedlayercontrol_plugin);
