@@ -169,18 +169,18 @@ function createHeatMaps()
 
   //Reference: https://gis.stackexchange.com/questions/267605/leaflet-api-select-one-overlay-at-a-time-like-base-layers
   
-  var options = {      
-    // Make the "Landmarks" group exclusive (use radio inputs)
-    exclusiveGroups: ["Reprensitives"],
-    // Show a checkbox next to non-exclusive group labels for toggling all
-    groupCheckboxes: true
-  }
-  var layerControl = L.control.groupedLayers(baseMaps, overlayMaps, options);
-  mymap.addControl(layerControl);
+  // var options = {      
+  //   // Make the "Landmarks" group exclusive (use radio inputs)
+  //   exclusiveGroups: ["Reprensitives"],
+  //   // Show a checkbox next to non-exclusive group labels for toggling all
+  //   groupCheckboxes: true
+  // }
+  // var layerControl = L.control.groupedLayers(baseMaps, overlayMaps, options);
+  // mymap.addControl(layerControl);
 
   // Without the leaflet-groupedlatercontrol, use the source code below
-  // L.control.layers(baseMaps).addTo(mymap);
-  // L.control.layers(overlayMaps).addTo(mymap);
+  L.control.layers(baseMaps).addTo(mymap);
+  L.control.layers(overlayMaps).addTo(mymap);
 }
 
 createHeatMaps()
