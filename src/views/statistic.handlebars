@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-7">
-                    <h1 class="m-0 text-dark">{{ display_property }} Statistic</h1>
+                    <h1 class="m-0 text-dark"><i class="nav-icon fas fa-tachometer-alt"></i> {{ display_property }} Statistic</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-1">
                  <a type="button" href="./hour" class="btn btn-block btn-primary">Hour</a>
@@ -127,11 +127,6 @@ function formatTimestamp(txt){
     bar_chart_max_data.push({{this.maximum}});
     unit = "{{this.unit}}";
   {{/each}}
-
-  console.log(line_chart_average_data);
-  console.log(bar_chart_min_data);
-  console.log(bar_chart_max_data);
-  console.log(label_chart_data);
 
   line_chart_average_data = line_chart_average_data.reverse()
   bar_chart_max_data = bar_chart_max_data.reverse()
@@ -257,6 +252,4 @@ function formatTimestamp(txt){
     data: lineChartData, 
     options: lineChartOptions
   });
-
-  console.log("END OF GRAPH SCRIPT");
 </script>

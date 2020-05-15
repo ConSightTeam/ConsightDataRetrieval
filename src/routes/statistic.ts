@@ -7,7 +7,6 @@ async function queryLatestBasedOnCertainTime(mode: string, property: string, uni
   let dao = new StatisticRepository(); 
   if (date_str) {
     let date: Date = new Date(date_str);
-    console.log(date);
     switch (mode) {
       case 'hour': return await dao.getStatisticsPerHourOnCertainDay(property, unit, date);
       case 'day': return await dao.getStatisticsPerDayOnCertainMonth(property, unit, date);

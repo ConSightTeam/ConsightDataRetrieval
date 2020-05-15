@@ -5,21 +5,17 @@ var layerControl = L.control.layers(baseMaps, null).addTo(mymap);
 
 // A helper function to create a marker
 function createMarkerHelper(icon){
-  console.log("Function - CreateMarkerHelper -> เริ่มดึงข้อมูลจาก server");
   var dataFromServer = JSON.parse(document.getElementById("dataFromServer").innerText);
 
   // Create the markerClusterGroup here
   var markerGroups = L.markerClusterGroup();
   var tempMarkerForLayer = [];
   for (i in dataFromServer){
-    console.log("Node ลำกับที่ " + i);
-    console.log(dataFromServer[i]);
-
     var title = dataFromServer[i].node_name
     var marker =  L.marker(new L.LatLng(dataFromServer[i].location.coordinates[0], dataFromServer[i].location.coordinates[1]),{
       title:title, icon: icon});
     
-    // HTML สำหรับใส่ใน Pop-up
+    // Insert pop-up in HTML
     var html = "<bigtext>" + dataFromServer[i].node_name + "</bigtext>";
     html += "<br>[" + dataFromServer[i].location.coordinates[0] + ", " + dataFromServer[i].location.coordinates[1] + "]<br>";
 
@@ -51,17 +47,15 @@ function createMarkerHelper(icon){
   return markerGroups;
 }
 
-//สร้าง marker ทดสอบที่ส่งมาจาก express ของลายเส้น
-function createFuckingClusterMarkers(){
-  console.log("เริ่มสร้าง marker");
-  var KLASSIcon = L.icon({
-    iconUrl: 'images/KLASS.png',
+function createClusterMarkers(){
+  var NodeIcon = L.icon({
+    iconUrl: 'images/Node_dark.png',
     iconSize:     [38, 50], 
     iconAnchor:   [0, 0], // point of the icon which will correspond to marker's location
     //popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
-  var getAllMarkersFromServer = createMarkerHelper(KLASSIcon);
+  var getAllMarkersFromServer = createMarkerHelper(NodeIcon);
   layerControl.addOverlay(getAllMarkersFromServer, "DataFromServer");
   mymap.addLayer(getAllMarkersFromServer);
 }
-createFuckingClusterMarkers(); //เพิ่มเข้ามาใหม่
+createClusterMarkers();
