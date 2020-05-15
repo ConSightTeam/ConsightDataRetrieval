@@ -26,8 +26,8 @@ function copyDependency() {
         }));
 };
 
-function css() {
-    return gulp.src('src/resources/css/**/*.css')
+function copyCSS() {
+    return gulp.src(['src/resources/css/**/*.css', 'node_modules/admin-lte/dist/css/**/*.css*', 'node_modules/bootstrap/dist/css/*.css'])
           .pipe(uglifycss({
             "maxLineLen": 80,
             "uglyComments": true
@@ -35,51 +35,36 @@ function css() {
           .pipe(gulp.dest(PROD_DEST + '/public/css'));
 }
 
-function adminLTE_css() { 
-    return gulp.src('node_modules/admin-lte/dist/css/**/*.css*')
-        .pipe(gulp.dest(PROD_DEST + '/public/css'))
-};
-
-function adminLTE_js() { 
-    return gulp.src('node_modules/admin-lte/dist/js/adminlte*')
-        .pipe(gulp.dest(PROD_DEST + '/public/js')) 
-};
-
-function adminLTE_plugins() {
-    return gulp.src(['node_modules/admin-lte/plugins/**/*', '!node_modules/admin-lte/plugins/**/package.json'])
-        .pipe(gulp.dest(PROD_DEST + '/public/plugins'))
-};
-
-function images() {
+function copyImages() {
     return gulp.src('src/resources/images/**/*.png')
           .pipe(imagemin({imagemin}))
           .pipe(gulp.dest(PROD_DEST + '/public/images'));
 };
 
-function heatmap_plugin() {
-    return gulp.src('node_modules/heatmap.js/build/heatmap.js')
-        .pipe(gulp.dest(PROD_DEST + '/public/plugins/heatmap'));
+function copyJavascript() { 
+    return gulp.src(['node_modules/admin-lte/dist/js/adminlte*', 'node_modules/bootstrap/dist/js/*.js'])
+        .pipe(gulp.dest(PROD_DEST + '/public/js')) 
 };
 
-function leaflet_heatmap_plugin() {
-    return gulp.src('node_modules/leaflet-heatmap/leaflet-heatmap.js')
-        .pipe(gulp.dest(PROD_DEST + '/public/plugins/heatmap'));
+function copyPlugins() {
+    return gulp.src(['node_modules/admin-lte/plugins/**/*', 
+    '!node_modules/admin-lte/plugins/**/package.json', 
+    'node_modules/leaflet/dist/**',
+    'node_modules/leaflet-groupedlayercontrol/src/**'])
+        .pipe(gulp.dest(PROD_DEST + '/public/plugins'))
 };
 
-function leaflet_groupedlayercontrol_plugin() {
-    return gulp.src('node_modules/leaflet-groupedlayercontrol/src/*.*')
-        .pipe(gulp.dest(PROD_DEST + '/public/plugins/leaflet-groupedlayercontrol'));
+function copyLeafletHeatmap() {
+    return gulp.src(['node_modules/heatmap.js/build/heatmap.js', 'node_modules/leaflet-heatmap/leaflet-heatmap.js'])
+        .pipe(gulp.dest(PROD_DEST + '/public/plugins/heatmap'));
 };
 
 exports.transpile = transpile;
-exports.copyDependency = copyDependency;
 exports.copyHandlebars = copyHandlebars;
-exports.css = css;
-exports.images = images;
-exports.adminLTE_css = adminLTE_css;
-exports.adminLTE_js = adminLTE_js;
-exports.adminLTE_plugins = adminLTE_plugins;
-exports.heatmap_plugin = heatmap_plugin;
-exports.leaflet_heatmap_plugin = leaflet_heatmap_plugin;
-exports.leaflet_groupedlayercontrol_plugin = leaflet_groupedlayercontrol_plugin;
-exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, adminLTE_css, adminLTE_js, adminLTE_plugins, css, images, heatmap_plugin, leaflet_heatmap_plugin, leaflet_groupedlayercontrol_plugin);
+exports.copyDependency = copyDependency;
+exports.copyCSS = copyCSS;
+exports.copyImages = copyImages;
+exports.copyJavascript = copyJavascript;
+exports.copyPlugins = copyPlugins;
+exports.copyLeafletHeatmap = copyLeafletHeatmap;
+exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, copyCSS, copyImages, copyJavascript, copyPlugins, copyLeafletHeatmap);

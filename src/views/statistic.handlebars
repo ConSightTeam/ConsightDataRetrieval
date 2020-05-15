@@ -94,7 +94,7 @@
   }
 
   function formatAverageValue(num){
-    return num.toFixed(4);
+    return num.toFixed(2);
   }
 
   dataInTable = '';
@@ -106,8 +106,7 @@
   // Insert the manipulated data in HTML (id = TableRow)
   document.getElementById('TableRow').innerHTML = dataInTable;
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="/plugins/chart.js/Chart.min.js"></script>
 <script>
   line_chart_average_data = []
   bar_chart_max_data = []
