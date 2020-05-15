@@ -33,52 +33,6 @@ body { margin: 0; padding: 0;
   padding: 10px;
 }
 
-/* css to customize Leaflet default styles  */
-.custom .leaflet-popup-tip,
-.custom .leaflet-popup-content-wrapper {
-    background: #e93434;
-    color: #ffffff;
-}
-
-/* ANOTHER css to customize Leaflet default styles  */
-.custom-popup .leaflet-popup-content-wrapper {
-  /*background:#2c3e50;
-  color:#fff;*/
-  font-size:16px;
-  line-height:24px;
-}
-.custom-popup .leaflet-popup-content-wrapper a {
-  color:rgba(255,255,255,0.5);
-  }
-.custom-popup .leaflet-popup-tip-container {
-  width:30px;
-  height:15px;
-  }
-.custom-popup .leaflet-popup-tip {
-  border-left:15px solid transparent;
-  border-right:15px solid transparent;
-  border-top:15px solid #2c3e50;
-  }
-
-.custom-popup img {
-  border: 1px solid #ddd;
-  padding: 5px;
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-}
-
-bigtext {
-  font-size: 20px;
-  font-weight: bold;
-  color: #6d7fcc;
-}
-
-smalltext {
-  font-size: 18px;
-  font-weight: bold;
-}
-
 .leaflet-retina .leaflet-control-layers-toggle {
   background-image: url("icons-000000@2x.png");
   background-size: 26px 26px;
@@ -96,4 +50,28 @@ smalltext {
 
 .starter-template p {
   color: black;
+}
+
+
+
+
+/* css to customize Leaflet default styles  */
+.custom-popup .leaflet-popup-content-wrapper {
+  font-size:16px;
+  line-height:24px;
+}
+
+.custom-popup .leaflet-popup-content-wrapper bigtext {
+  font-size: 20px;
+  font-weight: bold;
+  color: #007BFF;
+}
+
+.custom-popup .leaflet-popup-content-wrapper b {
+  color:#007BFF;
+}
+
+.custom-popup .leaflet-popup-tip-container {
+  width:30px;
+  height:15px;
 }

@@ -30,7 +30,7 @@
     <!-- Main content -->
     <div class="row mb-2">
       <div class="col-sm-6">
-    <div class="card card-primary">
+    <div id="MinMaxCard" class="card card-dark">
       <div class="card-header">
         <h3 class="card-title">{{ display_property }} Minimum and Maximum</h3>
         </div>
@@ -39,29 +39,35 @@
           <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
         </div>
       </div>
+      <div class="card-footer text-center">
+        <a href="#DetailsCard">View Details</a>
+      </div>
     </div>
     </div>
+
     <div class="col-sm-6">
-    <div class="card card-primary">
+    <div id="AverageCard" class="card card-dark">
       <div class="card-header">
         <h3 class="card-title">{{ display_property }} Average</h3>
-      </div>
+      </div>     
       <div class="card-body">
         <div class="chart">
           <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 607px;" width="607" height="250" class="chartjs-render-monitor"></canvas>        
         </div>
       </div>
+      <div class="card-footer text-center">
+        <a href="#DetailsCard">View Details</a>
+      </div>
     </div>
     </div>
     </div>
-
     <div>
         {{#unless statistics}}
           <p>No Data</p>
         {{/unless}}
         <div class="row">
           <div class="col-12">
-            <div class="card card-primary">
+            <div id="DetailsCard" class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title">Details</h3>
               </div>
@@ -80,6 +86,9 @@
                   <tbody id="TableRow">
                   </tbody>
                 </table>
+              </div>
+              <div class="card-footer clearfix">
+                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Export to Excel files</a>
               </div>
             </div>
           </div>
