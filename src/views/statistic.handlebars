@@ -112,6 +112,7 @@
   bar_chart_max_data = []
   bar_chart_min_data = []
   label_chart_data = []
+  unit = "";
 
 function formatTimestamp(txt){
   res = txt.split(" ");
@@ -124,6 +125,7 @@ function formatTimestamp(txt){
     line_chart_average_data.push({{this.average}}.toFixed(2));
     bar_chart_min_data.push({{this.minimum}});
     bar_chart_max_data.push({{this.maximum}});
+    unit = "{{this.unit}}";
   {{/each}}
 
   console.log(line_chart_average_data);
@@ -182,7 +184,7 @@ function formatTimestamp(txt){
       yAxes: [{        
         scaleLabel: {
           display: true,
-          labelString: "{{ display_property }}" + " (" + ")" // Insert the unit here
+          labelString: "{{ display_property }}" + " (" + unit + ")" // Insert the unit here
         }
       }]
     }
@@ -234,7 +236,7 @@ function formatTimestamp(txt){
       yAxes: [{
         scaleLabel: {
           display: true,
-          labelString: "{{ display_property }}" + " (" + ")" // Insert the unit here
+          labelString: "{{ display_property }}" + " (" + unit + ")" // Insert the unit here
         },
       }]
     }
