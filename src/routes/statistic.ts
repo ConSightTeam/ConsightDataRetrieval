@@ -1,65 +1,50 @@
-import { Router } from "express";
+import { Router, Request, Response, NextFunction } from "express";
 import { StatisticRepository } from "../repositories/StatisticRepository";
 var router = Router();
 
-async function queryLatestBasedOnCertainTime(mode: string, property: string, unit: string, date_str?: string): Promise<Statistic[]> {
-  let dao = new StatisticRepository();
-  if (date_str) {
-    let date: Date = new Date(date_str);
-    switch (mode) {
-      case 'hour': return await dao.getStatisticsPerHourOnCertainDay(property, unit, date);
-      case 'day': return await dao.getStatisticsPerDayOnCertainMonth(property, unit, date);
-      case 'month': return await dao.getStatisticsPerMonthOnCertainYear(property, unit, date);
-      default: return null;;
-    }
-  } else {
-    switch (mode) {
-      case 'hour': return await dao.getStatisticsPerHour(property, unit);
-      case 'day': return await dao.getStatisticsPerDay(property, unit);
-      case 'month': return await dao.getStatisticsPerMonth(property, unit);
-      default: return null;;
-    }
-  }
+const display_properties = {
+  pm2_5: 'PM 2.5',
+  pm10: 'PM 10',
+  pm1: 'PM 1',
+  temperature: "Temperature",
+  humidity: "Humidity",
+  co_density: "Co Density"
 }
 
-router.get('/pm2_5/:mode', async function (req, res, next) {
+router.get('/:property/:unit/:mode', async function(req: Request, res: Response, next: NextFunction) {
+  let date_str: string = req.query['date'];
+  let property: string = req.params['property'];
+  let unit: string = req.params['unit'];
+  let mode: string = req.params['mode'];
+
+  let statistics: Array<Statistic>;
+  let dao = new StatisticRepository();
+
   try {
-    res.render('statistic', { display_property: "PM2.5", statistics: await queryLatestBasedOnCertainTime(req.params['mode'], 'pm2_5', 'μg/m^3', req.query['date']) });
+    if (date_str) {
+      let date: Date = new Date(date_str);
+      switch (mode) {
+        case 'hour': statistics = await dao.getStatisticsPerHourOnCertainDay(property, unit, date); break;
+        case 'day': statistics = await dao.getStatisticsPerDayOnCertainMonth(property, unit, date); break;
+        case 'month': statistics = await dao.getStatisticsPerMonthOnCertainYear(property, unit, date); break;
+        default: throw new Error('Invalid Mode');
+      }
+    } else {
+      switch (mode) {
+        case 'hour': statistics = await dao.getStatisticsPerHour(property, unit); break;
+        case 'day': statistics = await dao.getStatisticsPerDay(property, unit); break;
+        case 'month': statistics = await dao.getStatisticsPerMonth(property, unit); break;
+        default: throw new Error('Invalid Mode');
+      }
+    }
   } catch (e) {
-    next(e);
+    console.error(e.stack);
+    return next(e);
   }
+
+  res.render('statistic', { statistics: statistics, display_property: display_properties[property] || property });
 });
 
-router.get('/pm10/:mode', async function (req, res, next) {
-  try {
-    res.render('statistic', { display_property: "PM10", statistics: await queryLatestBasedOnCertainTime(req.params['mode'], 'pm10', 'μg/m^3', req.query['date']) });
-  } catch (e) {
-    next(e);
-  }
-});
 
-router.get('/pm1/:mode', async function (req, res, next) {
-  try {
-    res.render('statistic', { display_property: "PM1", statistics: await queryLatestBasedOnCertainTime(req.params['mode'], 'pm1', 'μg/m^3', req.query['date']) });
-  } catch (e) {
-    next(e);
-  }
-});
-
-router.get('/temperature/:mode', async function (req, res, next) {
-  try {
-    res.render('statistic', { display_property: "Temperature", statistics: await queryLatestBasedOnCertainTime(req.params['mode'], 'temperature', 'c', req.query['date']) });
-  } catch (e) {
-    next(e);
-  }
-});
-
-router.get('/humidity/:mode', async function (req, res, next) {
-  try {
-    res.render('statistic', { display_property: "Humidity", statistics: await queryLatestBasedOnCertainTime(req.params['mode'], 'humidity', '%', req.query['date']) });
-  } catch (e) {
-    next(e);
-  }
-});
 
 module.exports = router;

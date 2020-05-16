@@ -30,7 +30,7 @@ app.use('/contact', contactRouter as express.Router);
 app.use('/heatmap', heatmapRouter as express.Router);
 app.use('/statistic', statisticRouter as express.Router);
 
-app.use(function (err, req: express.Request, res: express.Response, next: express.NextFunction) {
+app.use(function (err: Error, req: express.Request, res: express.Response, next: express.NextFunction) {
     console.error(err.stack);
     res.status(500).render('error', { error: err });
 });
