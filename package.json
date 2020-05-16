@@ -11,6 +11,7 @@
     "@types/node": "^13.9.3",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
+    "export-to-csv": "^0.2.1",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
     "handlebars": "^4.7.6",
