@@ -1,8 +1,8 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var exphbs = require('express-handlebars');
+import * as express from "express";
+import * as path from "path";
+import * as logger from "morgan";
+import * as exphbs from "express-handlebars";
+
 
 let hbs = exphbs.create();
 
@@ -24,10 +24,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/about', aboutRouter);
-app.use('/contact', contactRouter);
-app.use('/heatmap', heatmapRouter);
-app.use('/statistic', statisticRouter);
+app.use('/', indexRouter as express.Router);
+app.use('/about', aboutRouter as express.Router);
+app.use('/contact', contactRouter as express.Router);
+app.use('/heatmap', heatmapRouter as express.Router);
+app.use('/statistic', statisticRouter as express.Router);
+
+app.use(function (err, req: express.Request, res: express.Response, next: express.NextFunction) {
+    console.error(err.stack);
+    res.status(500).render('error', { error: err });
+});
 
 module.exports = app;
