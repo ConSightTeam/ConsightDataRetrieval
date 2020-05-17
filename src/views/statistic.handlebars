@@ -8,21 +8,14 @@
                     <h1 class="m-0 text-dark"><i class="nav-icon fas fa-tachometer-alt"></i> {{ display_property }} Statistic</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-2">
-                  <div class="form-group">
-                    <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
-                      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
-                        <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
-                          <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                        </div>
+                <div class="form-group">
+                  <div class="input-group date" id="datetimepicker4" data-target-input="nearest">
+                    <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker4"/>
+                      <div class="input-group-append" data-target="#datetimepicker4" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                       </div>
                     </div>
-                    <script type="text/javascript">
-                      $(function () {
-                          $('#datetimepicker4').datetimepicker({
-                              format: 'L'
-                          });
-                      });
-                    </script>
+                  </div>
                 </div><!-- /.col -->
                 <div class="col-sm-1">
                  <a type="button" href="./hour" class="btn btn-block btn-primary">Hour</a>
@@ -87,13 +80,18 @@
             <div id="DetailsCard" class="card card-dark">
               <div class="card-header">
                 <h3 class="card-title">Details</h3>
+                <div class="card-tools">
+                <div class="input-group input-group-sm">
+                   <a href="{{mode}}/export" class="btn btn-sm btn-primary float-left">Export to CSV file</a>
+                </div>
+              </div>
               </div>
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
                       <th>#</th>
-                      <th>Timestamp</th>
+                      <th>Date</th>
                       <th>Minimum</th>
                       <th>Maximum</th>
                       <th>Average</th>
@@ -104,14 +102,20 @@
                   </tbody>
                 </table>
               </div>
-              <div class="card-footer clearfix">
-                <a href="{{mode}}/export" class="btn btn-sm btn-info float-left">Export to CSV file</a>
-              </div>
             </div>
           </div>
         </div>
     </div>
 </div>
+
+<script src="/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function () {
+      $('#datetimepicker4').datetimepicker({
+          format: 'L'
+      });
+  });
+</script>
 <script>
   // Manipulate data in the table, change from default format to human-readable format.
   function formatIndexValue(num){
@@ -122,10 +126,51 @@
     return num.toFixed(2);
   }
 
+  function formatTimestamp(txt){
+    res = txt.split(" ");
+    new_text = res[1] + " " + res[2] + " " + res[3] + " " + res[4] + " " + res[5];
+    return new_text 
+  }
+
+  function formatTimestampDay(txt){
+    res = txt.split(" ");
+    new_text = res[1] + " " + res[2] + " " + res[3];
+    return new_text 
+  }
+
+  function formatTimestampHour(txt){
+    res = txt.split(" ");
+    //new_text = res[1] + " " + res[2] + " " + res[3];
+    timeHHMMSS = res[4].split(":");
+    timeHHMMSS = timeHHMMSS[0] + ":" + timeHHMMSS[1];
+    new_text = res[1] + " " + res[2] + " " + res[3] + "&ensp;(" + timeHHMMSS + ")";
+    return new_text
+  }
+
+  function formatTimestampMonth(txt){
+    res = txt.split(" ");
+    new_text = res[1] + " " + res[3];
+    return new_text 
+  }
+
   dataInTable = '';
 
   {{#each statistics}}
-    dataInTable += '<tr><td>' + formatIndexValue({{ @index }}) + '</td><td>{{this.inserted_on_date}}</td><td>{{ this.minimum }}</td><td>{{ this.maximum }}</td><td>' + formatAverageValue({{ this.average }}) + '</td></tr>'
+    dataInTable += '<tr><td>' + formatIndexValue({{ @index }});
+    // If URL contain 'day'
+    if (window.location.href.indexOf("day") > -1) {
+      dataInTable += '<td>' + formatTimestampDay("{{this.inserted_on_date}}") + '</td>';
+      // If URL contain 'hour'
+    } else if (window.location.href.indexOf("hour") > -1) {
+      dataInTable += '<td>' + formatTimestampHour("{{this.inserted_on_date}}") + '</td>';
+      // If URL contain 'month'
+    } else if (window.location.href.indexOf("month") > -1) {
+      dataInTable += '<td>' + formatTimestampMonth("{{this.inserted_on_date}}") + '</td>';
+    } else {
+      dataInTable += '<td>' + formatTimestamp("{{this.inserted_on_date}}") + '</td>';
+    }
+    dataInTable += '<td>{{ this.minimum }}</td><td>{{ this.maximum }}</td><td>';
+    dataInTable += formatAverageValue({{ this.average }}) + '</td></tr>';
   {{/each}}
 
   // Insert the manipulated data in HTML (id = TableRow)
@@ -139,11 +184,11 @@
   label_chart_data = []
   unit = "";
 
-function formatTimestamp(txt){
-  res = txt.split(" ");
-  new_text = res[1] + " " + res[2] + " " + res[3] + " " + res[4] + " " + res[5];
-  return new_text 
-}
+  function formatTimestamp(txt){
+    res = txt.split(" ");
+    new_text = res[1] + " " + res[2] + " " + res[3] + " " + res[4] + " " + res[5];
+    return new_text 
+  }
 
   {{#each statistics}}
     label_chart_data.push(formatTimestamp("{{this.inserted_on_date}}"));
