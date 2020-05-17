@@ -26,13 +26,11 @@ function getSortNodeDataKey(nodeData)
 
 function getAttrsSize()
 {
-  console.log("Function call: gerAttrsSize()")
   var dataFromServer =  getGeospatialDataFromServer();
   var attr_size = 0;
   for(retrieved_data in dataFromServer)
   {
     node_data = dataFromServer[retrieved_data].data
-    console.log(node_data)
     for(x in node_data)
     {
       attr_size += 1;
@@ -64,9 +62,6 @@ function getGeospatialAttrs()
     }
   }
 
-  console.log("Keys");
-  console.log(keys);
-
   //  Remove empty list of geospatial attributes
   geospatial_attrs = geospatial_attrs.filter(function(item){
       return item.length != 0;
@@ -76,12 +71,6 @@ function getGeospatialAttrs()
   keys = keys.filter(function(item, index){
     return keys.indexOf(item) >= index;
   });
-
-
-  console.log("Geospatial Attributes");
-  console.log(geospatial_attrs);
-  console.log("Keys");
-  console.log(keys);
 
   return {attrs: geospatial_attrs, attr_key: keys};
 }
@@ -101,22 +90,13 @@ function findMax(geospatial_data)
       max = attr.value;
     }
   });
-  console.log("Find max: "+ max);
   return max;
 }
 
 function createHeatMaps()
 {
-
-  console.log("Begin creating the heatmap");
-  console.log("Retrieving data from back-end");
   var heatmapLayers = [];
-
   var geospatial_data = getGeospatialAttrs();
-  
-  //console.log(testData)
-  console.log("Finish data retrieval from back-end");
-
   var heatmap_config_list = []
   for(each_heatmap_config in geospatial_data.attrs)
   {
@@ -141,20 +121,14 @@ function createHeatMaps()
     heatmap_config_list.push(heatmap_config);
   }
 
-  console.log("Init new HeatmapOverlay to the heatmap layers list");
   for(each_attr in geospatial_data.attrs)
   {
     var new_layer = new HeatmapOverlay(heatmap_config_list[each_attr]);
-    console.log("Adding new HeatmapOverlay " + each_attr);
     heatmapLayers.push(new_layer);
   }
 
-  console.log("Set data to heatmap layer")
   for(var heatmap = 0; heatmap < heatmapLayers.length; heatmap++)
   {
-    console.log("geospatial_attrs content: ");
-    console.log(geospatial_data.attrs[heatmap]);
-    console.log(geospatial_data.attr_key[heatmap]);
     tmp_data = { 
       max: findMax(geospatial_data.attrs[heatmap]),
       data: geospatial_data.attrs[heatmap]
