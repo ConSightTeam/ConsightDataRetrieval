@@ -25,23 +25,29 @@ function createMarkerHelper(icon){
     html += "<br>[" + dataFromServer[i].location.coordinates[0] + ", " + dataFromServer[i].location.coordinates[1] + "]<br>" ;
     html += "<br><b>Node Owner:</b> " + dataFromServer[i].owner + "<br>";
 
-    if (dataFromServer[i].data.hasOwnProperty('temperature')){
-      html += "<br><img src='images/statusicon/thermometer.png' width='50px' height='50px'> <b>&nbspTemperature:</b> " + dataFromServer[i].data.temperature;
-    }
-    if (dataFromServer[i].data.hasOwnProperty('humidity')){
-      html += "<br><img src='images/statusicon/humidity.png' width='50px' height='50px'> <b>&nbspRelative Humidity:</b> " + dataFromServer[i].data.humidity;
-    }
-    if (dataFromServer[i].data.hasOwnProperty('co_density')){
-      html += "<br><img src='images/statusicon/sand.png' width='50px' height='50px'> <b>&nbspDensity:</b> " + dataFromServer[i].data.co_density;
-    }
-    if (dataFromServer[i].data.hasOwnProperty('pm1')){
-      html += "<br><img src='images/statusicon/pm1icon.png' width='50px' height='50px'> <b>&nbspPM1:</b> " + dataFromServer[i].data.pm1;
-    }
-    if (dataFromServer[i].data.hasOwnProperty('pm10')){
-      html += "<br><img src='images/statusicon/pm10icon.png' width='50px' height='50px'> <b>&nbspPM10:</b> " + dataFromServer[i].data.pm10;
-    }
-    if (dataFromServer[i].data.hasOwnProperty('pm2_5')){
-      html += "<br><img src='images/statusicon/pm2_5icon.png' width='50px' height='50px'> <b>&nbspPM2.5:</b> " + dataFromServer[i].data.pm2_5;
+    for (let key in dataFromServer[i].data) {
+      switch (key) {
+        case 'temperature':
+          html += "<br><img src='images/statusicon/thermometer.png' width='50px' height='50px'> <b>&nbspTemperature:</b> " + dataFromServer[i].data.temperature;
+          break;
+        case 'humidity':
+          html += "<br><img src='images/statusicon/humidity.png' width='50px' height='50px'> <b>&nbspRelative Humidity:</b> " + dataFromServer[i].data.humidity;
+          break;
+        case 'co_density':
+          html += "<br><img src='images/statusicon/sand.png' width='50px' height='50px'> <b>&nbspDensity:</b> " + dataFromServer[i].data.co_density;
+          break;
+        case 'pm1':
+          html += "<br><img src='images/statusicon/pm1icon.png' width='50px' height='50px'> <b>&nbspPM1:</b> " + dataFromServer[i].data.pm1;
+          break;
+        case 'pm10':
+          html += "<br><img src='images/statusicon/pm10icon.png' width='50px' height='50px'> <b>&nbspPM10:</b> " + dataFromServer[i].data.pm10;
+          break;
+        case 'pm2_5':
+          html += "<br><img src='images/statusicon/pm2_5icon.png' width='50px' height='50px'> <b>&nbspPM2.5:</b> " + dataFromServer[i].data.pm2_5;
+          break;
+        default:
+          html += "<br> <b>&nbsp" + key + ":</b> " + dataFromServer[i].data[key];
+      } 
     }
 
     marker.bindPopup(html, customPopupOptions);
