@@ -12,6 +12,14 @@ const display_properties = {
   co_density: "Co Density"
 };
 
+/**
+ * Certain reverse proxy escape slash in URL before sending it to us, which cause 404
+ * As a workaround we replace slash with '!' in URL
+ */
+function unescape_backspace(original_unit: string) {
+  return original_unit.replace('!', '/');
+}
+
 function getStatistics(date_str: string, property: string, unit: string, mode: string): Promise<Array<Statistic>> {
   let dao = new StatisticRepository();
 
@@ -36,7 +44,7 @@ function getStatistics(date_str: string, property: string, unit: string, mode: s
 router.get('/:property/:unit/:mode', async function (req: Request, res: Response, next: NextFunction) {
   let date_str: string = req.query['date'];
   let property: string = req.params['property'];
-  let unit: string = req.params['unit'];
+  let unit: string = unescape_backspace(req.params['unit']);
   let mode: string = req.params['mode'];
 
   try {
@@ -52,7 +60,7 @@ router.get('/:property/:unit/:mode/export', async function (req: Request, res: R
 
   let date_str: string = req.query['date'];
   let property: string = req.params['property'];
-  let unit: string = req.params['unit'];
+  let unit: string = unescape_backspace(req.params['unit']);
   let mode: string = req.params['mode'];
 
   res.setHeader('Content-Type', 'application/octet-stream');
