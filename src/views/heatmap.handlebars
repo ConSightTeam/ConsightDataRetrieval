@@ -57,11 +57,11 @@
           currentDate = moment(); // Current Time (=Today)
       }
       $('#HeatmapDateTimePicker').datetimepicker({
-          format: 'L',
           defaultDate: currentDate
       });
       $('#HeatmapDateTimePicker').on("hide.datetimepicker", function (e) {
-        var userSelectedDate = moment(e.date).format("YYYY-MM-DD");
+        //var userSelectedDate = moment(e.date).format("YYYY-MM-DD");
+        var userSelectedDate = moment(e.date).format("YYYY-MM-DD[T]HH:mm");
         window.location.href = "?date=" + userSelectedDate;
       });
   });

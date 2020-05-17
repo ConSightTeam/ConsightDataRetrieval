@@ -53,11 +53,10 @@
           currentDate = moment(); // Current Time (=Today)
       }
       $('#GeomapDateTimePicker').datetimepicker({
-          format: 'L',
           defaultDate: currentDate
       });
       $('#GeomapDateTimePicker').on("hide.datetimepicker", function (e) {
-        var userSelectedDate = moment(e.date).format("YYYY-MM-DD");
+        var userSelectedDate = moment(e.date).format("YYYY-MM-DD[T]HH:mm");
         window.location.href = "?date=" + userSelectedDate;
       });
   });
