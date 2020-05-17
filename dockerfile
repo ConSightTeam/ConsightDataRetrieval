@@ -14,5 +14,5 @@ FROM node:12
 WORKDIR /app
 COPY --from=build /app/dist .
 
-EXPOSE 3073
+EXPOSE 3074
 CMD [ "node", "bin/www.js" ] 
