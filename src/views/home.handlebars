@@ -45,8 +45,16 @@
 <script src="/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript">
   $(function () {
+      var currentDate;
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.has('date')){
+          currentDate = urlParams.get('date'); // Get date from URL
+      } else {
+          currentDate = moment(); // Current Time (=Today)
+      }
       $('#GeomapDateTimePicker').datetimepicker({
-          format: 'L'
+          format: 'L',
+          defaultDate: currentDate
       });
       $('#GeomapDateTimePicker').on("hide.datetimepicker", function (e) {
         var userSelectedDate = moment(e.date).format("YYYY-MM-DD");

@@ -108,21 +108,30 @@
     </div>
 </div>
 
+
 <script src="/plugins/jquery/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/moment.min.js"></script>
 <script type="text/javascript">
+  // Datepicker
+  var currentDate = moment();
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has('date')){
+      currentDate = urlParams.get('date'); // Get date from URL
+  }
   $(function () {
-    // If URL contain 'hour'
     if (window.location.href.indexOf("hour") > -1) {
-        $('#StatisticDateTimePicker').datetimepicker();
+        $('#StatisticDateTimePicker').datetimepicker({
+          defaultDate: currentDate,
+        });
         $('#StatisticDateTimePicker').on("hide.datetimepicker", function (e) {
           var userSelectedDate = moment(e.date).format("YYYY-MM-DD");
           window.location.href = "?date=" + userSelectedDate;
         });
-      // If URL contain 'month'
     } else if (window.location.href.indexOf("month") > -1) {
         $('#StatisticDateTimePicker').datetimepicker({
             viewMode: 'months',
-            format: 'MM/YYYY'
+            format: 'MM/YYYY',
+            defaultDate: currentDate
         });
         $('#StatisticDateTimePicker').on("hide.datetimepicker", function (e) {
           var userSelectedDate = moment(e.date).format("YYYY-MM");
@@ -130,7 +139,8 @@
         });
     } else {
       $('#StatisticDateTimePicker').datetimepicker({
-          format: 'L'
+          format: 'L',
+          defaultDate: currentDate
       });
       $('#StatisticDateTimePicker').on("hide.datetimepicker", function (e) {
         var userSelectedDate = moment(e.date).format("YYYY-MM-DD");
@@ -180,13 +190,10 @@
 
   {{#each statistics}}
     dataInTable += '<tr><td>' + formatIndexValue({{ @index }});
-    // If URL contain 'day'
     if (window.location.href.indexOf("day") > -1) {
       dataInTable += '<td>' + formatTimestampDay("{{this.inserted_on_date}}") + '</td>';
-      // If URL contain 'hour'
     } else if (window.location.href.indexOf("hour") > -1) {
       dataInTable += '<td>' + formatTimestampHour("{{this.inserted_on_date}}") + '</td>';
-      // If URL contain 'month'
     } else if (window.location.href.indexOf("month") > -1) {
       dataInTable += '<td>' + formatTimestampMonth("{{this.inserted_on_date}}") + '</td>';
     } else {
