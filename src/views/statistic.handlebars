@@ -4,29 +4,10 @@
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-5">
+                <div class="col-sm-9">
                     <h1 class="m-0 text-dark"><i class="nav-icon fas fa-tachometer-alt"></i> {{ display_property }} Statistic</h1>
                 </div><!-- /.col -->
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <div class="input-group date" id="StatisticDateTimePicker" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#StatisticDateTimePicker"/>
-                            <div class="input-group-append" data-target="#StatisticDateTimePicker" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- /.col -->
-                <div class="col-sm-1">
-                 <a type="button" href="./hour" class="btn btn-block btn-primary">Hour</a>
-                </div><!-- /.col -->
-                <div class="col-sm-1">
-                 <a type="button" href="./day" class="btn btn-block btn-primary">Day</a>
-                </div><!-- /.col -->
-                <div class="col-sm-1">
-                 <a type="button" href="./month" class="btn btn-block btn-primary">Month</a>
-                </div><!-- /.col -->
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="./">Home</a></li>
                         <li class="breadcrumb-item active">{{ display_property }} Statistic</li>
@@ -39,23 +20,7 @@
 
     <!-- Main content -->
     <div class="row mb-2">
-      <div class="col-sm-6">
-    <div id="MinMaxCard" class="card card-dark">
-      <div class="card-header">
-        <h3 class="card-title">{{ display_property }} Minimum and Maximum</h3>
-        </div>
-      <div class="card-body">
-        <div class="chart">
-          <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 616px;" width="616" height="250" class="chartjs-render-monitor"></canvas>
-        </div>
-      </div>
-      <div class="card-footer text-center">
-        <a href="#DetailsCard">View Details</a>
-      </div>
-    </div>
-    </div>
-
-    <div class="col-sm-6">
+    <div class="col-sm-10">
     <div id="AverageCard" class="card card-dark">
       <div class="card-header">
         <h3 class="card-title">{{ display_property }} Average</h3>
@@ -69,6 +34,22 @@
         <a href="#DetailsCard">View Details</a>
       </div>
     </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="form-group">
+            <div class="input-group date" id="StatisticDateTimePicker" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#StatisticDateTimePicker"/>
+                <div class="input-group-append" data-target="#StatisticDateTimePicker" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+      <a type="button" href="./hour" class="btn btn-block btn-primary">Hour</a>
+      <a type="button" href="./day" class="btn btn-block btn-primary">Day</a>
+      <a type="button" href="./month" class="btn btn-block btn-primary">Month</a>
+      <blockquote>
+        <p><b>Note:</b> The <code>average</code> is calculated by all node available in each unit of time.</p>
+      </blockquote>
     </div>
     </div>
     <div>
@@ -110,50 +91,7 @@
 
 <script src="/plugins/jquery/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.25.3/moment.min.js"></script>
-<script type="text/javascript">
-  // Datepicker
-  var currentDate = moment();
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.has('date')){
-      currentDate = urlParams.get('date'); // Get date from URL instead of current time
-  }
-  $(function () {
-    // Hour
-    if (window.location.href.indexOf("hour") > -1) {
-        $('#StatisticDateTimePicker').datetimepicker({
-          viewMode: 'days',
-          format: 'DD/MM/YYYY',
-          defaultDate: currentDate
-        });
-        $('#StatisticDateTimePicker').on("hide.datetimepicker", function (e) {
-          var userSelectedDate = moment(e.date).format("YYYY-MM-DD");
-          window.location.href = "?date=" + userSelectedDate;
-        });
-    // Month
-    } else if (window.location.href.indexOf("month") > -1) {
-        $('#StatisticDateTimePicker').datetimepicker({
-            viewMode: 'years',
-            format: 'YYYY',
-            defaultDate: currentDate
-        });
-        $('#StatisticDateTimePicker').on("hide.datetimepicker", function (e) {
-          var userSelectedDate = moment(e.date).format("YYYY");
-          window.location.href = "?date=" + userSelectedDate;
-        });
-    // Day
-    } else {
-      $('#StatisticDateTimePicker').datetimepicker({
-          viewMode: 'months',
-          format: 'MM/YYYY',
-          defaultDate: currentDate
-      });
-      $('#StatisticDateTimePicker').on("hide.datetimepicker", function (e) {
-        var userSelectedDate = moment(e.date).format("YYYY-MM");
-        window.location.href = "?date=" + userSelectedDate;
-      });
-    }
-  });
-</script>
+<script src="/js/datepicker.js"></script>
 <script>
   // Manipulate data in the table, change from default format to human-readable format.
   function formatIndexValue(num){
@@ -213,10 +151,10 @@
 </script>
 <script src="/plugins/chart.js/Chart.min.js"></script>
 <script>
-  line_chart_average_data = []
-  bar_chart_max_data = []
-  bar_chart_min_data = []
-  label_chart_data = []
+  chart_average_data = []
+  chart_max_data = []
+  chart_min_data = []
+  chart_labels = []
   unit = "";
 
   function formatTimestamp(txt){
@@ -226,94 +164,62 @@
   }
 
   {{#each statistics}}
-    label_chart_data.push(formatTimestamp("{{this.inserted_on_date}}"));
-    line_chart_average_data.push({{this.average}}.toFixed(2));
-    bar_chart_min_data.push({{this.minimum}});
-    bar_chart_max_data.push({{this.maximum}});
+    chart_labels.push(formatTimestamp("{{this.inserted_on_date}}"));
+    chart_average_data.push({{this.average}}.toFixed(2));
+    chart_min_data.push({{this.minimum}});
+    chart_max_data.push({{this.maximum}});
     unit = "{{this.unit}}";
   {{/each}}
 
-  line_chart_average_data = line_chart_average_data.reverse()
-  bar_chart_max_data = bar_chart_max_data.reverse()
-  bar_chart_min_data = bar_chart_min_data.reverse()
-  label_chart_data = label_chart_data.reverse()
+  chart_average_data = chart_average_data.reverse()
+  chart_max_data = chart_max_data.reverse()
+  chart_min_data = chart_min_data.reverse()
+  chart_labels = chart_labels.reverse()
 
-  //Barchart
-  var barChartData = {
-    labels  : label_chart_data,
-    datasets: [
+  // Line chart
+  var lineChartData = {
+  labels  : chart_labels,
+  datasets: [
       {
         label               : 'Minimum',
+        fill                : false,
         backgroundColor     : '#ced4da',
         borderColor         : '#ced4da',
-        pointRadius          : false,
         pointColor          : '#3b8bba',
         pointStrokeColor    : 'rgba(60,141,188,1)',
         pointHighlightFill  : '#fff',
         pointHighlightStroke: 'rgba(60,141,188,1)',
-        data                : bar_chart_min_data
+        data                : chart_min_data
+      },
+      {
+        label               : 'Average',
+        fill                : false,
+        backgroundColor     : '#007bff',
+        borderColor         : '#007bff',
+        pointColor          : '#007bff',
+        pointStrokeColor    : 'rgba(60,141,188,1)',
+        pointHighlightFill  : '#fff',
+        pointHighlightStroke: 'rgba(60,141,188,1)',
+        data                : chart_average_data
       },
       {
         label               : 'Maximum',
-        backgroundColor     : '#007bff',
-        borderColor         : '#007bff',
-        pointRadius         : false,
-        pointColor          : '#007bff',
+        fill                : false,
+        backgroundColor     : '#6610f2',
+        borderColor         : '#6610f2',
+        pointColor          : '#6610f2',
         pointStrokeColor    : '#c1c7d1',
         pointHighlightFill  : '#fff',
         pointHighlightStroke: 'rgba(220,220,220,1)',
-        data                : bar_chart_max_data
-      },
-    ]
-  }
-
-  var barChartOptions = {
-    responsive              : true,
-    maintainAspectRatio     : false,
-    datasetFill             : false, 
-    scales: {
-      xAxes: [{
-        ticks : {
-          display : false,
-        },
-          scaleLabel: {
-          display: true,
-          labelString: 'time' + " (" + ")" // Insert the mode here
-        },
-      }],
-      yAxes: [{        
-        scaleLabel: {
-          display: true,
-          labelString: "{{ display_property }}" + " (" + unit + ")" // Insert the unit here
-        }
+        data                : chart_max_data
       }]
     }
-  }
-
-  // Line chart
-  var lineChartData = {
-  labels  : label_chart_data,
-  datasets: [
-    {
-      label               : 'Average',
-      fill                : false,
-      backgroundColor     : '#007bff',
-      borderColor         : '#007bff',
-      pointRadius         : false,
-      pointColor          : '#007bff',
-      pointStrokeColor    : 'rgba(60,141,188,1)',
-      pointHighlightFill  : '#fff',
-      pointHighlightStroke: 'rgba(60,141,188,1)',
-      data                : line_chart_average_data
-    },
-  ]
-}
 
   var lineChartOptions = {
     maintainAspectRatio : false,
     responsive : true,
     legend: {
-      display: false
+      display: true
     },
     tooltips: {
       mode: 'index',
@@ -336,19 +242,12 @@
       yAxes: [{
         scaleLabel: {
           display: true,
+          stacked: true,
           labelString: "{{ display_property }}" + " (" + unit + ")" // Insert the unit here
         },
       }]
     }
   }
-
-  // Initialize Bar chart
-  var bar_ctx = document.getElementById('barChart').getContext('2d');
-  var barChart = new Chart(bar_ctx, {
-    type: 'bar', 
-    data: barChartData,
-    options: barChartOptions
-  });
 
   // Initialize Line chart
   var line_ctx = document.getElementById('lineChart').getContext('2d');
