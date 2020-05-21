@@ -69,7 +69,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
                         <li class="nav-item">
-                            <a href="/" class="nav-link">
+                            <a href="/" class="nav-link {{#if active.Home}}active{{/if}}">
                                 <i class="nav-icon fas fa-map"></i>
                                 <p>
                                     Geospatial Map
@@ -78,7 +78,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/heatmap" class="nav-link">
+                            <a href="/heatmap" class="nav-link {{#if active.Heatmap}}active{{/if}}">
                                 <i class="nav-icon fas fa-map"></i>
                                 <p>
                                     Heat Map
@@ -87,7 +87,7 @@
                         </li>
                         
                         <li class="nav-item has-treeview menu-open">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link {{#if active.Statistic}}active{{/if}}">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Statistic
@@ -135,7 +135,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="/about" class="nav-link">
+                            <a href="/about" class="nav-link {{#if active.About}}active{{/if}}">
                                 <i class="nav-icon fas fa-user-circle"></i>
                                 <p>
                                     About
@@ -144,7 +144,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="https://adminlte.io/docs/3.0" class="nav-link">
+                            <a href="/doc" class="nav-link {{#if active.Doc}}active{{/if}}">
                                 <i class="nav-icon fas fa-file"></i>
                                 <p>Documentation</p>
                             </a>

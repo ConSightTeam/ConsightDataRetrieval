@@ -48,7 +48,7 @@ router.get('/:property/:unit/:mode', async function (req: Request, res: Response
   let mode: string = req.params['mode'];
 
   try {
-    res.render('statistic', { statistics: await getStatistics(date_str, property, unit, mode), display_property: display_properties[property] || property, mode: mode });
+    res.render('statistic', { active: { Statistic: true }, statistics: await getStatistics(date_str, property, unit, mode), display_property: display_properties[property] || property, mode: mode });
   } catch (e) {
     console.error(e.stack);
     return next(e);

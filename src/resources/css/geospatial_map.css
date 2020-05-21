@@ -34,7 +34,7 @@ body { margin: 0; padding: 0;
 }
 
 .leaflet-retina .leaflet-control-layers-toggle {
-  background-image: url("icons-000000@2x.png");
+  background-image: url("leafletmenu.png");
   background-size: 26px 26px;
 }
 

@@ -12,6 +12,7 @@ import * as contactRouter from './routes/contact';
 import * as othersRouter from './routes/others';
 import * as heatmapRouter from './routes/heatmap';
 import * as statisticRouter from './routes/statistic';
+import * as docRouter from './routes/doc';
 
 let app = express();
 
@@ -31,6 +32,7 @@ app.use('/contact', contactRouter as express.Router);
 app.use('/others', othersRouter as express.Router);
 app.use('/heatmap', heatmapRouter as express.Router);
 app.use('/statistic', statisticRouter as express.Router);
+app.use('/doc', docRouter as express.Router);
 
 app.use(function(req: express.Request, res: express.Response) {
     res.status(400);
