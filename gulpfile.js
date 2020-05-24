@@ -37,9 +37,15 @@ function copyCSS() {
 }
 
 function copyImages() {
-    return gulp.src(['src/resources/images/**/*.png'])
+    return gulp.src(['src/resources/images/**/*.png',
+    'src/resources/images/favicon.ico'])
           .pipe(imagemin({imagemin}))
           .pipe(gulp.dest(PROD_DEST + '/public/images'));
+};
+
+function copyFavicon() {
+    return gulp.src(['src/resources/images/favicon.ico'])
+          .pipe(gulp.dest(PROD_DEST + '/public'));
 };
 
 function copyJavascript() { 
@@ -66,7 +72,8 @@ exports.copyHandlebars = copyHandlebars;
 exports.copyDependency = copyDependency;
 exports.copyCSS = copyCSS;
 exports.copyImages = copyImages;
+exports.copyFavicon = copyFavicon;
 exports.copyJavascript = copyJavascript;
 exports.copyPlugins = copyPlugins;
 exports.copyLeafletHeatmap = copyLeafletHeatmap;
-exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, copyCSS, copyImages, copyJavascript, copyPlugins, copyLeafletHeatmap);
+exports.default = gulp.parallel(transpile, copyHandlebars, copyDependency, copyCSS, copyImages,copyFavicon, copyJavascript, copyPlugins, copyLeafletHeatmap);

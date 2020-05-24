@@ -96,37 +96,37 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="/statistic/pm2_5/%CE%BCg!m%5E3/day" class="nav-link">
+                                    <a href="/statistic/pm2_5/%CE%BCg!m%5E3/day" class="nav-link {{#if active.pm2_5}}active{{/if}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>PM 2.5</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/statistic/pm10/%CE%BCg!m%5E3/day" class="nav-link">
+                                    <a href="/statistic/pm10/%CE%BCg!m%5E3/day" class="nav-link {{#if active.pm10}}active{{/if}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>PM 10</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/statistic/pm1/%CE%BCg!m%5E3/day" class="nav-link">
+                                    <a href="/statistic/pm1/%CE%BCg!m%5E3/day" class="nav-link {{#if active.pm1}}active{{/if}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>PM 1</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/statistic/temperature/c/day" class="nav-link">
+                                    <a href="/statistic/temperature/c/day" class="nav-link {{#if active.temperature}}active{{/if}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Temperature</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/statistic/humidity/%25/day" class="nav-link">
+                                    <a href="/statistic/humidity/%25/day" class="nav-link {{#if active.humidity}}active{{/if}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Humidity</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="/others" class="nav-link">
+                                    <a href="/others" class="nav-link {{#if active.Others}}active{{/if}}">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Others</p>
                                     </a>
@@ -140,13 +140,6 @@
                                 <p>
                                     About
                                 </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="/doc" class="nav-link {{#if active.Doc}}active{{/if}}">
-                                <i class="nav-icon fas fa-file"></i>
-                                <p>Documentation</p>
                             </a>
                         </li>
                     </ul>
@@ -163,7 +156,7 @@
             <strong>Copyright &copy; 2020 <a href="#">ConSight</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 1.0 Release Candidate2
+                <b>Version</b> 1.0
             </div>
         </footer>
 
